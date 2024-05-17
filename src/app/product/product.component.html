@@ -1,0 +1,23 @@
+<div style="padding: 50px;">
+    <h1 class="tex-center">Lista de tasas </h1>
+    <table class="table table-hover">
+        <thead class="table-danger">
+        <tr>
+           <th scope="col">#</th>
+           <th scope="col">name</th> 
+            <th scope="col">price</th>
+        </tr>
+    </thead>
+    <tbody>
+            @for (item of lista; track $index) {
+        <tr>
+            <td> {{item.id}} </td>
+            <td>{{item.nombre}}</td>
+            <td>{{item.tasa}}</td>
+
+        </tr>
+    }
+    </tbody>
+    </table>
+
+</div>
