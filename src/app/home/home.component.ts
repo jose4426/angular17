@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, numberAttribute } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { ApiService } from '../service/api.service';
 import { ProductComponent } from '../product/product.component';
@@ -24,6 +24,14 @@ inserts: productoInterface | null=null;
   };
   productoAEliminar: productoInterface | null = null;
   confirmDeleteModal: boolean = false;
+
+  tasaTotal: number = 0;
+  total: number = 0
+  tasaResta: number = 0;
+  index1: number = 0;
+  index2: number= 0;
+  index3: number= 0;
+  totalBs: number= 0;
 
   constructor(private apiService : ApiService){
     
@@ -126,7 +134,22 @@ cancelarEdicion() {
 refreshPage() {
   window.location.reload();
 }
+calcularTasaTotal() {
+  this.tasaTotal = this.lista.reduce((acc, item) => acc + item.tasa, 0);
+}
 
+restarTasas(index1: number, index2: number) {
+  if (index1 >= 0 && index2 >= 0)  {
+     
 
+    this.tasaResta = Number(((this.lista[1].tasa - this.lista[0].tasa )*this.index3).toFixed(2));
+    this.totalBs   = Number((this.tasaResta/this.lista[0].tasa).toFixed(2))
+  } else {
+    this.tasaResta = 0;  // O cualquier valor por defecto o mensaje de error
+  }
+}
+calculoTasa(){
+  this.total = Number((this.lista[1].tasa/1.05).toFixed(2));
+}
 
 }
