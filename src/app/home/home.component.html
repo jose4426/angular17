@@ -1,136 +1,132 @@
 <div>
   <app-header></app-header>
 </div>
-<div  scope="col" class="col-4 text-center"    style="padding: 50px;">
-  <h1 class="tex-center">Listado de tasas </h1>
-  <table class="table table-hover">
-    <thead class="table-danger">
-      <tr>
-        <th scope="col" class="col-1 text-center ">#</th>
-        <th scope="col" class="col-2 text-center ">name</th>
-        <th scope="col" class="col-2 text-center ">price</th>
-        <th scope="col" class="col-2 text-center" >
-          
-         
-        </th>
-      </tr>
-    </thead>
-    <!--Lista -->
-    <tbody>
-      @for (item of lista; track $index) {
-      <tr>
-        <td class="text-center"> {{item.id}} </td>
-        <td class="text-center">{{item.nombre}}</td>
-        <td class="text-center">{{item.tasa}}</td>
 
-        <div class="d-flex justify-content-center ">
-        <td>
-          <div>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarModal"
-            (click)="seleccionarProducto(item)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-              <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
-              <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
-            </svg>
-          </button>
-        </div>
-        </td>
-        <td>
-          <button type="button" class="btn btn-danger" (click)="mostrarModalEliminar(item.id)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill"
-              viewBox="0 0 16 16">
-              <path
-                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-            </svg>
-          </button>
-        </td>
+<div class="container">
+  <div class="row">
+    <!-- Columna para la imagen -->
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <img [src]="imageUrl" alt="Descripción de la imagen" class="img-fluid">
+    </div>
+    
+    <!-- Columna para la tabla -->
+    <div class="col-md-6 text-center" style="padding: 50px;">
+      <h1 class="text-center">Listado de tasas</h1>
+      <table class="table table-hover">
+        <thead class="table-danger">
+          <tr>
+            <th scope="col" class="col-1 text-center">#</th>
+            <th scope="col" class="col-2 text-center">Name</th>
+            <th scope="col" class="col-2 text-center">Price</th>
+            <th scope="col" class="col-2 text-center"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of lista; let index = index">
+            <td class="text-center">{{ item.id }}</td>
+            <td class="text-center">{{ item.nombre }}</td>
+            <td class="text-center">{{ item.tasa }}</td>
+            <td class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#editarModal"
+                (click)="seleccionarProducto(item)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                  <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
+                  <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
+                </svg>
+              </button>
+              <button type="button" class="btn btn-danger" (click)="mostrarModalEliminar(item.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Formulario para calcular tasa a partir de Binance 5% -->
+      <div class="mb-3">
+        <label for="index2" class="form-label">Calculo de tasa</label>
       </div>
-      </tr>
-      }
-    </tbody>
-  </table>
- <!-- Formulario para calcular tasa apartir de binace 5% -->
-    <tr>
- <div class="mb-3 ">
-      
-  <label for="index2" class="form-label">calculo de tasa</label>
+      <button type="button" class="btn btn-primary" (click)="calculoTasa()">Consultar Tasa</button>
+      <div class="mt-3">
+        <p>Resultado: {{ total }}</p>
+      </div>
+
+      <!-- Formulario para seleccionar las tasas a restar -->
+      <div class="d-flex justify-content-center">
+        <div class="mb-3 col-6">
+          <label for="index2" class="form-label">Camtidad a Cambiar</label>
+          <input type="number" id="index2" class="form-control text-center" [(ngModel)]="index3">
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="calculoBs()">Cantidad en Bs</button>
+      <div class="mt-3">
+        <p>Resultado: {{ totalBss }}</p>
+
+      </div>
+
+      <button type="button" class="btn btn-primary" (click)="restarTasas(index1, index2)">Ganancia</button>
+      <div class="mt-3">
+        <p>Resultado: {{ tasaResta }}</p>
+        <p>$: {{ totalBs }}</p>
+      </div>
+
+      <!-- Botón para crear producto -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertModal">
+        Crear Producto
+      </button>
+    </div>
+  </div>
 </div>
 
-<button type="button" class="btn btn-primary" (click)="calculoTasa()">tasa</button>
-<div class="mt-3">
-  <p>Resultado: {{ total }}</p>
+<!-- Modal de edición -->
+<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editarModalLabel">Editar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form *ngIf="productoSeleccionado" (ngSubmit)="guardarCambios()">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="productoSeleccionado.nombre" name="nombre" required>
+          </div>
+          <div class="mb-3">
+            <label for="tasa" class="form-label">Tasa</label>
+            <input type="number" class="form-control" id="tasa" [(ngModel)]="productoSeleccionado.tasa" name="tasa" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
-    <!-- Formulario para seleccionar las tasas a restar -->
-    <div class="d-flex justify-content-center">
-    <div class="mb-3 col-6">
 
-      <label for="index2" class="form-label">Cambio</label>
-      <input type="number" id="index2" class="form-control text-center " [(ngModel)]="index3">
-    </div>
-  </div>
-    <button type="button" class="btn btn-primary" (click)="restarTasas(index1, index2)">Ganancia</button>
-    <div class="mt-3">
-      <p>Resultado: {{ tasaResta }}</p>
-      <p>$: {{ totalBs }}</p>
-    </div>
-  
-
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#insertModal">
-    Crear Producto
-  </button>
-
-  <!-- Modal de edición -->
-  <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editarModalLabel">Editar Producto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form *ngIf="productoSeleccionado" (ngSubmit)="guardarCambios()">
-            <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" [(ngModel)]="productoSeleccionado.nombre"
-                name="nombre" required>
-            </div>
-            <div class="mb-3">
-              <label for="tasa" class="form-label">Tasa</label>
-              <input type="number" class="form-control" id="tasa" [(ngModel)]="productoSeleccionado.tasa" name="tasa"
-                required>
-            </div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <button type="button" class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
-          </form>
-        </div>
+<!-- Modal de inserción -->
+<div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="insertModalLabel">Insertar Nuevo Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="insertarProducto()">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoProducto.nombre" name="nombre" required>
+          </div>
+          <div class="mb-3">
+            <label for="tasa" class="form-label">Tasa</label>
+            <input type="number" class="form-control" id="tasa" [(ngModel)]="nuevoProducto.tasa" name="tasa" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Insertar</button>
+        </form>
       </div>
     </div>
   </div>
-  <!--insert-->
-  <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="insertModalLabel">Insertar Nuevo Producto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form (ngSubmit)="insertarProducto()">
-            <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoProducto.nombre" name="nombre"
-                required>
-            </div>
-            <div class="mb-3">
-              <label for="tasa" class="form-label">Tasa</label>
-              <input type="number" class="form-control" id="tasa" [(ngModel)]="nuevoProducto.tasa" name="tasa" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Insertar</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
 </div>

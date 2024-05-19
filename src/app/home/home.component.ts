@@ -32,6 +32,10 @@ inserts: productoInterface | null=null;
   index2: number= 0;
   index3: number= 0;
   totalBs: number= 0;
+  totalBss: number= 0;
+  imageUrl: string = 'https://cdn.litemarkets.com/cache/uploads/blog_post/blog_posts/liteforex-blog-cryptocurrency-rates_1000x545.jpg?q=75&w=1000&s=a725cbc2beb49334383d6c1069b804f0'; // URL de la imagen
+
+https: any;
 
   constructor(private apiService : ApiService){
     
@@ -150,6 +154,9 @@ restarTasas(index1: number, index2: number) {
 }
 calculoTasa(){
   this.total = Number((this.lista[1].tasa/1.05).toFixed(2));
+}
+calculoBs(){
+this.totalBss =Number(( this.total*this.index3).toFixed(2));
 }
 
 }
