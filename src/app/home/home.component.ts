@@ -24,6 +24,7 @@ inserts: productoInterface | null=null;
   };
   productoAEliminar: productoInterface | null = null;
   confirmDeleteModal: boolean = false;
+  token: string= "";
 
   tasaTotal: number = 0;
   total: number = 0
@@ -34,6 +35,7 @@ inserts: productoInterface | null=null;
   totalBs: number= 0;
   totalBss: number= 0;
   imageUrl: string = 'https://cdn.litemarkets.com/cache/uploads/blog_post/blog_posts/liteforex-blog-cryptocurrency-rates_1000x545.jpg?q=75&w=1000&s=a725cbc2beb49334383d6c1069b804f0'; // URL de la imagen
+  isAuthenticated: boolean = false;  // Variable de estado de autenticación
 
 https: any;
 
@@ -42,10 +44,19 @@ https: any;
   }
 
   ngOnInit(): void {
+    this.checkAuthentication(); 
     this.llenarData();
+
+  }
+  checkAuthentication() {
+    // Lógica para verificar si el usuario está autenticado
+    // Esto puede ser una llamada a un servicio de autenticación o verificación del token almacenado
+    const token = localStorage.getItem('token');
+    this.isAuthenticated = !!token;  // Ejemplo simple: verifica si hay un token
   }
 
-  llenarData(){
+  llenarData (){
+  
     this.apiService.getProducts().subscribe( {
       next: (data)=>{
         this.lista = data;
@@ -57,6 +68,7 @@ https: any;
   })
   
 }
+
 
 
 insertarProducto() {

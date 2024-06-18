@@ -10,7 +10,8 @@ import { productoInterface } from '../interface/product.interface';
 
 export class ApiService {
 
-API_URL: string =   "http://localhost:8086/cambio";
+  private tokenKey = 'authToken';
+API_URL: string =   "http://localhost:8088/cambio";
 
   constructor( private http: HttpClient) { }
 
