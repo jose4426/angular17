@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@extractus/article-extractor": "8.0.10",
     "@angular/animations": "^17.3.0",
     "@angular/common": "^17.3.0",
     "@angular/compiler": "^17.3.0",
@@ -21,6 +22,7 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "jquery": "^3.7.1",
+    "ngx-websocket": "^0.4.2",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.11.1",
     "tslib": "^2.3.0",

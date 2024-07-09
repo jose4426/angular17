@@ -4,10 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../register/AuthService';
 
-
-
-
-
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -39,4 +35,5 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']);  
 
   }
+
 }

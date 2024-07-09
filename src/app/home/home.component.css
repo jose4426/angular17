@@ -65,7 +65,8 @@
     width: 100px;
     height: 40px;
     padding: 2px 2px;
-    border: 1px solid #39c;
+    border: 1px solid #39c;    
+
     text-align: center;
 
   }
@@ -78,4 +79,129 @@
     text-align: center;
     background-color: #EEEE;
 
+  }
+  .input-correo {
+    border-radius: 5px;
+    width: 190px;
+    height: 40px;
+    padding: 2px 2px;
+    border: 1px solid #39c;
+    text-align: center;
+
+  }
+  .button-email {
+    background-color: rgb(11, 94, 215); /* Green */
+    width: 60px;
+    height: 40px;
+    border: none;
+    color: white;
+    padding: 2px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+
+  .button-send {
+    background-color: #25D366; /* Green */
+    width: 40px;
+    height: 40px;
+    border: none;
+    color: white;
+    padding: 2px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+
+  }
+  .redondeado-msj {
+    background-color: #25D366; /* Green */
+    width: 200px;
+    height: 40px;
+    position: -ms-page;
+    border: none;
+    color: white;
+    padding: 2px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: -moz-inline-box;
+    font-size: 16px;
+    border-radius: 5px;
+    align-content: end;
+  }
+  .chat-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .message-bubble {
+    background-color: #e9ecef;
+    border-radius: 10px;
+    padding: 2px;
+    margin-bottom: 5px;
+    display: block; /* Asegura que cada burbuja de mensaje ocupe una línea completa */
+    max-width: fit-content; /* Ajusta la burbuja al contenido */
+    word-wrap: break-word;
+    text-align: left; /* Alinear el texto a la izquierda */
+    size: 3cm;
+  }
+  
+  
+  .message-text {
+    margin: 0;
+  }
+  
+  .input-message {
+    flex: 1;
+    resize: none; /* Prevenir el redimensionamiento por defecto */
+    overflow: hidden; /* Ocultar la barra de desplazamiento */
+  }
+  
+  .button-send {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+  }
+  
+  .button-ganancia {
+    background-color: rgb(11, 94, 215); /* Green */
+    width: 80px;
+    height: 40px;
+    border: none;
+    color: white;
+    padding: 2px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  .carousel-item {
+    position: relative;
+  }
+  
+  .carousel-item .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .carousel-item:hover .overlay {
+    opacity: 1;
   }

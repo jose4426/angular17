@@ -1,22 +1,49 @@
 <div>
   <app-header></app-header>
 </div>
-
 <div class="container">
   <div class="row">
     <!-- Columna para la imagen -->
-    <div class="col-md-6 d-flex justify-content-center align-items-center">
-      <img [src]="imageUrl" alt="Descripción de la imagen" class="img-fluid">
+    <div class="col-md-6 d-flex align-items-center">
+      <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img [src]="imageUrl" alt="Descripción de la imagen 1" class="d-block w-100">
+            <div class="overlay"><h5>Ponemos el poder de las criptomonedas en tus manos </h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img class="img-fluid" src="assets/img/2.png" alt="..." title="Project Name"/>
+            <div class="overlay"> Comercios fáciles, rápidos y seguros con atención personalizada. </div>
+          </div>
+          <div class="carousel-item">
+            <img class="img-fluid" src="assets/img/3.png" alt="..." title="Project Name"/>
+            <div class="overlay"> <h5>Compra y venta de zelle</h5></div>
+          </div>
+          <div class="carousel-item">
+            <img class="img-fluid" src="assets/img/4.png" alt="..." title="Project Name"/>
+            <div class="overlay"><h5>Cambia de euros a USD</h5></div>
+          </div>
+          <!-- Añade más items del carrusel según sea necesario -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
-    
     <!-- Columna para la tabla -->
     <div class="col-md-6 text-center" style="padding: 50px;">
       <h1 class="text-center">Listado de Tasas</h1>
       <table class="table table-hover">
         <thead class="table-danger">
           <tr>
-            <th scope="col" class="col-2 text-center">Referencia</th>
-            <th scope="col" class="col-2 text-center">Tasa</th>
+            <th class="col-2 text-center">Referencia</th>
+            <th class="col-2 text-center">Tasa</th>
             <th *ngIf="isAuthenticated" scope="col" class="col-2 text-center"></th>
           </tr>
         </thead>
@@ -25,16 +52,22 @@
             <td class="text-center">{{ item.nombre }}</td>
             <td class="text-center">{{ item.tasa }}</td>
             <td *ngIf="isAuthenticated" class="d-flex justify-content-center">
-              <button  type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#editarModal"
+              <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#editarModal"
                 (click)="seleccionarProducto(item)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-                  <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
-                  <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                  <path
+                    d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                  <path fill-rule="evenodd"
+                    d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
                 </svg>
               </button>
-              <button *ngIf="isAuthenticated" type="button" class="btn btn-danger" (click)="mostrarModalEliminar(item.id)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+              <button *ngIf="isAuthenticated" type="button" class="btn btn-danger"
+                (click)="mostrarModalEliminar(item.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
                 </svg>
               </button>
             </td>
@@ -43,45 +76,83 @@
       </table>
 
       <!-- Formulario para calcular tasa a partir de Binance 5% -->
-      <div >
-        <label for="index2" class="form-label"> <b><h4>Calculo de Tasa</h4> </b></label>
+      <div>
+        <label for="index22" class="form-label"> <b>
+            <h4>Calculo de Tasa</h4>
+          </b></label>
       </div>
-      
-<div class="col-12 d-flex justify-content-center">
-  <button type="button" class="button me-1 mb-2" (click)="calculoTasa()">Tasa RapiCambio</button>
-  <input  id="index2" class="redondeado mb-2 " [(ngModel)]="total">
-  <p class="mt-2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
-  <!--p class="mt-2"> {{total}}</p-->
-</div>
+
+      <div class="col-12 d-flex justify-content-center">
+        <button type="button" class="button me-1 mb-2">Tasa RapiCambio</button>
+        <input id="index21" class="redondeado mb-2 " [(ngModel)]="total"readonly >
+        <p class="mt-2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+      </div>
 
       <!-- Formulario para seleccionar las tasas a restar -->
-        <div class="col-12 d-flex justify-content-center">
-          <button type="button" class="button me-1 mb-2">Cantidad a Cambiar</button>
-          <input type="number" id="index2" class="input mb-2  me-1" [(ngModel)]="index3">
-          <p class="mt-2">USDs</p>
-        </div>
-   
-    <div class="col-12 d-flex justify-content-center">
-      <button type="button" class="button  me-1 mb-2" (click)="calculoBs()">Cantidad en Bs</button>
-      <input  id="index2" class="redondeado mb-2" [(ngModel)]="tasaTotal">
-      <p class="mt-2"> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;&nbsp; </p>
-      <!--p class="mt-2" > {{totalBss}}</p-->
-    </div>
-<div class="col-12 d-flex">
-      <button *ngIf="isAuthenticated"  type="button" class="button me-1" 
-      (click)="restarTasas(index1, index2)">Ganancia</button>
-      <div  *ngIf="isAuthenticated" class="d-flex " >
-        <input  id="index2" class="redondeado mb-2 me-1" [(ngModel)]="tasaResta">
-        <!--p > {{ tasaResta }}</p-->
-        <input  id="index2" class="redondeado " [(ngModel)]="totalBs">
-        <!--p >$: {{ totalBs }}</p-->
+      <div class="col-12 d-flex justify-content-center">
+        <button type="button" class="button me-1 mb-2">Cantidad a Cambiar</button>
+        <input type="number" id="index23" class="input mb-2 me-1" [(ngModel)]="index3" placeholder="0"
+          (ngModelChange)="calculoBs()" (ngModelChange)="restarTasas(index1, index2)">
+        <p class="mt-2">USD</p>
       </div>
-    </div>
+
+      <div class="col-12 d-flex justify-content-center">
+        <button type="button" class="button  me-1 mb-2" (click)="calculoBs()">Cantidad en Bs</button>
+        <input id="index22" class="redondeado mb-2" [(ngModel)]="tasaTotal" readonly> 
+        <p class="mt-2"> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </p>
+      </div>
+            <!-- Botón Ganancia -->
+      <div class="col-12 d-flex justify-content-center">
+        <button *ngIf="isAuthenticated" type="button" class="button-ganancia me-1"
+          (click)="restarTasas(index1, index2)">Ganancia</button>
+        <div *ngIf="isAuthenticated" class="d-flex ">
+          <input id="index2" class="redondeado mb-2 me-1 " [(ngModel)]="tasaResta" readonly>
+          <!--p > {{ tasaResta }}</p-->
+          <input id="index2" class="redondeado " [(ngModel)]="totalBs" readonly>
+          <p class="mt-2"> &nbsp;&nbsp;</p>
+
+        </div>
+      </div>
       <!-- Botón para crear producto -->
-      <button *ngIf="isAuthenticated" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertModal">
+      <button *ngIf="isAuthenticated" type="button" class="btn btn-primary mb-2" data-bs-toggle="modal"
+        data-bs-target="#insertModal">
         Crear Producto
       </button>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="button-email me-1 mb-2">Email</button>
 
+        <input id="email" class="input-correo mb-2 me-1 " [(ngModel)]="email" placeholder="example@gmail.com" required>
+        <p class="mt-2"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+
+      </div>
+
+      <!-- Botón para enviar email -->
+
+      <div class="col-12 d-flex justify-content-center">
+        <button type="button" class="btn btn-primary me-1 mb-2" (click)="sendEmail()">Crear Orden</button>
+      </div>
+
+<!-- Sección de mensajes -->
+<div class="chat-container">
+  <div class="messages-area">
+    <div *ngFor="let msg of messages" class="message-bubble">
+      <p class="message-text">{{ msg }}</p>
+    </div>
+  </div>
+  <div class="d-flex align-items-center">
+    <textarea [(ngModel)]="message" placeholder="Escribe un mensaje" 
+      class="form-control me-1 input-message" (input)="autoResize($event)" (keydown.enter)="sendMessage()" 
+      rows="1"></textarea>
+    <button type="button" class="btn btn-primary button-send" (click)="sendMessage()">
+      <i class="bi bi-send-fill"></i>
+    </button>
+  </div>
+</div>
+
+
+<!-- Section de mensaje /-->
+
+     
     </div>
 
   </div>
@@ -99,11 +170,13 @@
         <form *ngIf="productoSeleccionado" (ngSubmit)="guardarCambios()">
           <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" [(ngModel)]="productoSeleccionado.nombre" name="nombre" required>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="productoSeleccionado.nombre" name="nombre"
+              required>
           </div>
           <div class="mb-3">
             <label for="tasa" class="form-label">Tasa</label>
-            <input type="number" class="form-control" id="tasa" [(ngModel)]="productoSeleccionado.tasa" name="tasa" required>
+            <input type="number" class="form-control" id="tasa" [(ngModel)]="productoSeleccionado.tasa" name="tasa"
+              required>
           </div>
           <button type="submit" class="btn btn-primary">Guardar</button>
           <button type="button" class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
@@ -125,7 +198,8 @@
         <form (ngSubmit)="insertarProducto()">
           <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoProducto.nombre" name="nombre" required>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoProducto.nombre" name="nombre"
+              required>
           </div>
           <div class="mb-3">
             <label for="tasa" class="form-label">Tasa</label>
@@ -138,4 +212,3 @@
   </div>
 
 </div>
-

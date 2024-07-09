@@ -9,6 +9,11 @@ import { AuthService } from '../register/AuthService';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import Swal from 'sweetalert2';
+import { EmailService } from '../email/email';
+import { ChatService } from '../chat/ChatService';
+import { empty } from 'rxjs';
+
+
 
 
 @Component({
@@ -24,43 +29,50 @@ export class HomeComponent implements OnInit {
   inserts: productoInterface | null = null;
   nuevoProducto: Partial<productoInterface> = {
     nombre: '',
-    tasa: 0
+    tasa: 0,
+
   };
   productoAEliminar: productoInterface | null = null;
   confirmDeleteModal: boolean = false;
   token: string = "";
 
   tasaTotal: number | null = null;
-  total: number  | null = null;
-  tasaResta: number |null = null;
+  total: number | null = null;
+  tasaResta: number | null = null;
   index1: number = 0;
   index2: number = 0;
-  index3: number = 0;
-  totalBs: number |null = null;
-  totalBss: number |null = null;
+  index3: number | null = null;
+  index33: number | null = null;
+  totalBs: number | null = null;
+  totalBss: number | null = null;
   imageUrl: string = 'https://cdn.litemarkets.com/cache/uploads/blog_post/blog_posts/liteforex-blog-cryptocurrency-rates_1000x545.jpg?q=75&w=1000&s=a725cbc2beb49334383d6c1069b804f0'; // URL de la imagen
   isAuthenticated: boolean = false;  // Variable de estado de autenticación
+  email: string | null = null;
+  message: string = '';
+  tasaRapi:number | null = null;
+  messages: string[] = [];
 
   https: any;
 
-  constructor(private apiService: ApiService, private authService: AuthService, private router: Router) {
+  constructor(private apiService: ApiService, private authService: AuthService, private router: Router, private emailService: EmailService,private chatService: ChatService) {
 
   }
 
   ngOnInit(): void {
     this.checkAuthentication();
     this.llenarData();
-    this.calculoTasa();
-
+    this.chatService.getMessages().subscribe((msg: string) => {
+      this.messages.push(msg);
+    });
   }
   checkAuthentication() {
     const token = localStorage.getItem('token');
-    this.isAuthenticated = !!token; 
+    this.isAuthenticated = !!token;
   }
   logout() {
     this.authService.logout();
     this.isAuthenticated = false;
-    this.router.navigate(['/login']); 
+    this.router.navigate(['/login']);
   }
 
   llenarData() {
@@ -68,12 +80,15 @@ export class HomeComponent implements OnInit {
     this.apiService.getProducts().subscribe({
       next: (data) => {
         this.lista = data;
+        this.calculoTasa();
+
       },
-      
       error: (err: any) => {
         console.log(err);
       },
+
     })
+    this.calculoTasa();
 
   }
 
@@ -90,10 +105,10 @@ export class HomeComponent implements OnInit {
             title: '¡Los datos fueron actualizados con éxito!',
             text: 'Serás redirigido en breve...',
             icon: 'success',
-            timer: 3000,
+            timer: 2000,
             timerProgressBar: true,
             willClose: () => {
-              this.refreshPage(); 
+              this.refreshPage();
             }
           });
         },
@@ -128,17 +143,17 @@ export class HomeComponent implements OnInit {
     console.log("entro en el boton eliminar ")
     this.productoAEliminar = producto;
     window.alert('decea eliminar el cambio');
-    
+
 
     this.confirmarEliminar(producto.toString())
     this.refreshPage();
   }
 
   seleccionarProducto(producto: productoInterface) {
-    this.productoSeleccionado = { ...producto };  
+    this.productoSeleccionado = { ...producto };
   }
   editarProducto(producto: productoInterface) {
-    this.productoSeleccionado = { ...producto };  
+    this.productoSeleccionado = { ...producto };
   }
   guardarCambios() {
     if (this.productoSeleccionado) {
@@ -150,10 +165,10 @@ export class HomeComponent implements OnInit {
             title: '¡Los datos fueron actualizados con éxito!',
             text: 'Serás redirigido en breve...',
             icon: 'success',
-            timer: 3000,
+            timer: 1200,
             timerProgressBar: true,
             willClose: () => {
-              this.refreshPage(); 
+              this.refreshPage();
             }
           });
         },
@@ -171,30 +186,69 @@ export class HomeComponent implements OnInit {
   refreshPage() {
     window.location.reload();
   }
-  calcularTasaTotal() {
-    this.tasaTotal = this.lista.reduce((acc, item) => acc + item.tasa, 0);
-  }
 
-  restarTasas(index1: number, index2: number) {
-    if (index1 >= 0 && index2 >= 0) {
-
-
-      this.tasaResta = Number(((this.lista[1].tasa - this.lista[0].tasa) * this.index3).toFixed(2));
-      this.totalBs = Number((this.tasaResta / this.lista[0].tasa).toFixed(2))
-    } else {
-      this.tasaResta = 0;  
-    }
-  }
   calculoTasa() {
-    if (this.lista && this.lista.length > 0){
+    if (this.lista && this.lista.length > 0) {
       this.total = Number((this.lista[0].tasa * 1.02).toFixed(2));
 
     }
   }
-  calculoBs() {
-    if (this.total !== null) {
-      this.tasaTotal = this.total * this.index3; // Ejemplo de cálculo
+  restarTasas(index1: number, index2: number) {
+    
+    if (index1 >= 0 && index2 >= 0 && this.index3 !== null && this.total !== null) {
+      this.tasaResta = Number(((this.lista[1].tasa -this.total) * this.index3).toFixed(2));
+      this.totalBs = Number((this.tasaResta /this.total).toFixed(2))
+    } else {
+      this.tasaResta = 0;
     }
   }
+ 
+  calculoBs() {
+    if (this.index3 !== null && this.total !== null) {
+      this.tasaTotal = Number((this.total * this.index3).toFixed(2)); 
+    }
+  }
+
+  sendEmail() {
+    const to = "gonzalezjar231@gmail.com";
+    const subject = 'Datos Calculados';
+    if(this.email !==null ){
+      const text = `Tasa: ${this.total}\nCantidad a Cambiar: ${this.index3}\nTotal en Bs: ${this.tasaTotal}\nEmail: ${this.email}`;
+
+      this.emailService.sendEmail(to, subject, text).subscribe(response => {
+        console.log('Email sent successfully', response);
+     
+      }
+      , error => {
+        console.log('Error sending email', error);
+      });
+      Swal.fire({
+        title: '¡Su orden fue creado con oc con éxito!',
+        text: 'Serás redirigido en breve...',
+        icon: 'success',
+        timer: 3000,
+        timerProgressBar: true,
+        willClose: () => {
+          this.refreshPage();
+        }
+      });
+    
+    }else
+
+    window.alert('!Tiene que agregar un correo electronico');
+
+  }
+
+  sendMessage() {
+    if (this.message.trim()) {
+      this.messages.push(this.message);
+      this.message = '';
+    }
+  }
+  autoResize(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto'; // Restablecer la altura
+    textarea.style.height = `${textarea.scrollHeight}px`; // Establecer la altura según la altura de desplazamiento
+  }
+
 }
-//this.totalBss = Number((this.total * this.index3).toFixed(2));
