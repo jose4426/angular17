@@ -1,0 +1,11 @@
+{
+    "/api": {
+      "target": "https://www.bcv.org.ve",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug",
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }

@@ -11,7 +11,7 @@ import { productoInterface } from '../interface/product.interface';
 export class ApiService {
 
   private tokenKey = 'authToken';
-API_URL: string =   "http://localhost:8088/cambio";
+API_URL: string =   "http://localhost:8081/cambio";
 
   constructor( private http: HttpClient) { }
 
@@ -19,7 +19,7 @@ API_URL: string =   "http://localhost:8088/cambio";
     return this.http.get<productoInterface []>(`${this.API_URL}/lista`);
    
   }
-  public delete(id: string): Observable<void>{
+  public delete(id: string): Observable<void>{  
     console.log("entro en el boton eliminar ")
     return this.http.delete<void>(`${this.API_URL}/delete/${id}`);
   }
@@ -27,10 +27,19 @@ API_URL: string =   "http://localhost:8088/cambio";
     console.log("entro en el boton actualizar ")
     return this.http.put<productoInterface>(`${this.API_URL}/update/productoSeleccionado`,productoInterface);
   }
+  public updateBcv(){
+    console.log("entro en el boton actualizar ")
+    return this.http.get(`${this.API_URL}/dolar`);
+  }
+  public updateBtc(){
+    console.log("entro en el boton actualizar ")
+    return this.http.get(`${this.API_URL}/btc`);
+  }
   public insertarProducto(productoInterface: productoInterface): Observable<productoInterface>{
     console.log("entro en el boton inser ")
     return this.http.post<productoInterface>(`${this.API_URL}/create`,productoInterface);
   }
+
 }
 
 

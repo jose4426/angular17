@@ -1,61 +1,61 @@
 {
-  "hash": "fa7f3269",
+  "hash": "4015dc84",
   "configHash": "48af9ee8",
-  "lockfileHash": "aac7279b",
-  "browserHash": "c93e58f4",
+  "lockfileHash": "f48f1eeb",
+  "browserHash": "b0ddddac",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "0e34cad9",
+      "fileHash": "d8c7c19a",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "88964340",
+      "fileHash": "aaa00909",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "b606811c",
+      "fileHash": "f51c243c",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "4e86264e",
+      "fileHash": "bc06d4d8",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "39c62e51",
+      "fileHash": "d4404872",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "f7b62161",
+      "fileHash": "79103030",
       "needsInterop": false
     },
     "rxjs/operators": {
       "src": "../../../../../node_modules/rxjs/dist/esm5/operators/index.js",
       "file": "rxjs_operators.js",
-      "fileHash": "25cfc700",
+      "fileHash": "752b342a",
       "needsInterop": false
     },
     "rxjs/webSocket": {
       "src": "../../../../../node_modules/rxjs/dist/esm5/webSocket/index.js",
       "file": "rxjs_webSocket.js",
-      "fileHash": "eb65006f",
+      "fileHash": "790f968e",
       "needsInterop": false
     },
     "sweetalert2": {
       "src": "../../../../../node_modules/sweetalert2/dist/sweetalert2.all.js",
       "file": "sweetalert2.js",
-      "fileHash": "52e7bb85",
+      "fileHash": "3f5ce43b",
       "needsInterop": true
     }
   },

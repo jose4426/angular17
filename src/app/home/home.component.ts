@@ -11,9 +11,6 @@ import { FooterComponent } from '../footer/footer.component';
 import Swal from 'sweetalert2';
 import { EmailService } from '../email/email';
 import { ChatService } from '../chat/ChatService';
-import { empty } from 'rxjs';
-
-
 
 
 @Component({
@@ -30,7 +27,6 @@ export class HomeComponent implements OnInit {
   nuevoProducto: Partial<productoInterface> = {
     nombre: '',
     tasa: 0,
-
   };
   productoAEliminar: productoInterface | null = null;
   confirmDeleteModal: boolean = false;
@@ -49,21 +45,21 @@ export class HomeComponent implements OnInit {
   isAuthenticated: boolean = false;  // Variable de estado de autenticación
   email: string | null = null;
   message: string = '';
-  tasaRapi:number | null = null;
+  tasaRapi: number | null = null;
   messages: string[] = [];
 
   https: any;
 
-  constructor(private apiService: ApiService, private authService: AuthService, private router: Router, private emailService: EmailService,private chatService: ChatService) {
+  constructor(private apiService: ApiService, private authService: AuthService, private router: Router, private emailService: EmailService, private chatService: ChatService) {
 
   }
 
   ngOnInit(): void {
     this.checkAuthentication();
+    this.updateBcv();
+    this.updateBtc();
     this.llenarData();
-    this.chatService.getMessages().subscribe((msg: string) => {
-      this.messages.push(msg);
-    });
+
   }
   checkAuthentication() {
     const token = localStorage.getItem('token');
@@ -180,6 +176,20 @@ export class HomeComponent implements OnInit {
 
   }
 
+  updateBcv() {
+
+    this.apiService.updateBcv().subscribe(
+    );
+
+  }
+  updateBtc() {
+
+    this.apiService.updateBtc().subscribe(
+
+    );
+
+  }
+
   cancelarEdicion() {
     this.refreshPage()
   }
@@ -194,34 +204,34 @@ export class HomeComponent implements OnInit {
     }
   }
   restarTasas(index1: number, index2: number) {
-    
+
     if (index1 >= 0 && index2 >= 0 && this.index3 !== null && this.total !== null) {
-      this.tasaResta = Number(((this.lista[1].tasa -this.total) * this.index3).toFixed(2));
-      this.totalBs = Number((this.tasaResta /this.total).toFixed(2))
+      this.tasaResta = Number(((this.lista[1].tasa - this.total) * this.index3).toFixed(2));
+      this.totalBs = Number((this.tasaResta / this.total).toFixed(2))
     } else {
       this.tasaResta = 0;
     }
   }
- 
+
   calculoBs() {
     if (this.index3 !== null && this.total !== null) {
-      this.tasaTotal = Number((this.total * this.index3).toFixed(2)); 
+      this.tasaTotal = Number((this.total * this.index3).toFixed(2));
     }
   }
 
   sendEmail() {
     const to = "gonzalezjar231@gmail.com";
     const subject = 'Datos Calculados';
-    if(this.email !==null ){
+    if (this.email !== null) {
       const text = `Tasa: ${this.total}\nCantidad a Cambiar: ${this.index3}\nTotal en Bs: ${this.tasaTotal}\nEmail: ${this.email}`;
 
       this.emailService.sendEmail(to, subject, text).subscribe(response => {
         console.log('Email sent successfully', response);
-     
+
       }
-      , error => {
-        console.log('Error sending email', error);
-      });
+        , error => {
+          console.log('Error sending email', error);
+        });
       Swal.fire({
         title: '¡Su orden fue creado con oc con éxito!',
         text: 'Serás redirigido en breve...',
@@ -232,10 +242,10 @@ export class HomeComponent implements OnInit {
           this.refreshPage();
         }
       });
-    
-    }else
 
-    window.alert('!Tiene que agregar un correo electronico');
+    } else
+
+      window.alert('!Tiene que agregar un correo electronico');
 
   }
 
@@ -250,5 +260,6 @@ export class HomeComponent implements OnInit {
     textarea.style.height = 'auto'; // Restablecer la altura
     textarea.style.height = `${textarea.scrollHeight}px`; // Establecer la altura según la altura de desplazamiento
   }
+
 
 }
