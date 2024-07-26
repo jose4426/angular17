@@ -20,6 +20,7 @@
     "@angular/router": "^17.3.0",
     "@extractus/article-extractor": "8.0.10",
     "@popperjs/core": "^2.11.8",
+    "angular-cli-ghpages": "^2.0.1",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "cheerio": "^1.0.0-rc.12",
@@ -27,7 +28,7 @@
     "ngx-websocket": "^0.4.2",
     "playwright": "^1.45.1",
     "rxjs": "~7.8.0",
-    "sweetalert2": "^11.11.1",
+    "sweetalert2": "^11.6.13",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },

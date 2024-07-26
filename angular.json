@@ -19,6 +19,7 @@
             "polyfills": [
               "zone.js"
             ],
+            "baseHref": "https://jose4426.github.io/angular17/",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -31,6 +32,9 @@
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "sweetalert2"
             ]
           },
           "configurations": {
@@ -95,6 +99,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
@@ -102,5 +109,4 @@
   "cli": {
     "analytics": false
   }
-
 }
