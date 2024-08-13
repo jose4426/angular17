@@ -2,6 +2,7 @@
   <app-header></app-header>
 </div>
 <br>
+<br> 
 <br>
 <div class="container">
   <div class="row">
@@ -10,7 +11,7 @@
       <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img [src]="imageUrl" alt="Descripción de la imagen 1" class="d-block w-100">
+            <img class="img-fluid mt-5" src="assets/img/logo1.jpg" alt="Descripción de la imagen 2">
             <div class="overlay">
               <h5>Ponemos el poder de las criptomonedas en tus manos</h5>
             </div>
@@ -107,7 +108,7 @@
         <button type="button" class="button me-1 mb-2 ">Cant a Cambiar</button>
         <input type="number" id="index23" class="input  me-1 " [(ngModel)]="index3" placeholder="0.00"
           (ngModelChange)="calculoBs()" (ngModelChange)="restarTasas(index1, index2)">
-        <p class="mt-2 me">USD </p>
+        <p class="mt-2 me-1">USD </p>
 
       </div>
 
