@@ -206,4 +206,79 @@
     opacity: 1;
   }
  
+  .small-text {
+    font-size: 12px; /* Puedes ajustar el tamaño según lo que necesites */
+  }
+  .reduced-spacing {
+    margin-top: 1px;   /* Reduce el margen superior */
+    margin-bottom: 1px; /* Reduce el margen inferior */
+  }
+
+  .fixed-size-button {
+    width: 100px; /* Ancho fijo */
+    height: 40px; /* Alto fijo */
+    background-color: #007bff; /* Color de fondo (azul) */
+    color: white; /* Color del texto */
+    border-radius: 5px; /* Bordes redondeados (opcional) */
+    border: none; /* Quitar borde */
+  }
   
+  .fixed-size-button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse (opcional) */
+  }
+
+  .fixed-size-button1 {
+    width: 100px; /* Ancho fijo */
+    height: 40px; /* Alto fijo */
+    background-color: #007bff; /* Color de fondo (azul) */
+    color: white; /* Color del texto */
+    border-radius: 5px; /* Bordes redondeados (opcional) */
+    border: none; /* Quitar borde */
+  }
+
+  .container {
+    width: 100%; /* Asegura que el contenedor se ajuste al 100% del ancho disponible */
+  }
+  .d-flex {
+    display: flex;
+  }
+  .justify-content-center {
+    justify-content: center;
+  }
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 15px;
+    }
+    .col-md-6 {
+      width: 100%;
+    }
+  }
+
+  .carousel-inner {
+    height: 280px; /* Ajusta esta altura según lo necesites */
+    position: relative;
+  }
+  
+  .carousel-inner img {
+    height: 100%;
+    object-fit: cover; /* Ajusta el tamaño de la imagen sin perder su proporción */
+  }
+  
+  /* Evita que el header se sobreponga a las imágenes */
+  .header {
+    z-index: 10;
+    position: relative;
+  }
+  
+  /* Asegura que el overlay esté bien posicionado */
+  .overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5); /* Añade un fondo semitransparente */
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 20;
+  }

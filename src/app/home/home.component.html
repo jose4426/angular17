@@ -1,6 +1,8 @@
 <div>
   <app-header></app-header>
 </div>
+<br>
+<br>
 <div class="container">
   <div class="row">
     <!-- Columna para la imagen -->
@@ -14,19 +16,19 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img class="img-fluid" src="assets/img/2.png" alt="Descripción de la imagen 2">
+            <img class="d-block w-100 img-fluid" src="assets/img/2.png" alt="Descripción de la imagen 2">
             <div class="overlay">
               Comercios fáciles, rápidos y seguros con atención personalizada.
             </div>
           </div>
           <div class="carousel-item">
-            <img class="img-fluid" src="assets/img/3.png" alt="Descripción de la imagen 3">
+            <img class="d-block w-100 img-fluid" src="assets/img/3.png" alt="Descripción de la imagen 3">
             <div class="overlay">
               <h5>Compra y venta de Zelle</h5>
             </div>
           </div>
           <div class="carousel-item">
-            <img class="img-fluid" src="assets/img/4.png" alt="Descripción de la imagen 4">
+            <img class="d-block w-100 img-fluid" src="assets/img/4.png" alt="Descripción de la imagen 4">
             <div class="overlay">
               <h5>Cambia de euros a USD</h5>
             </div>
@@ -45,7 +47,7 @@
     </div>
     <!-- Columna para la tabla -->
 
-    <div class="col-md-6 text-center" style="padding: 50px;">
+    <div class="col-md-6 text-center">
       <br>
       <h1 class="text-center">Listado de Tasas</h1>
       <table class="table table-hover">
@@ -94,21 +96,23 @@
       </div>
 
       <div class="col-12 d-flex justify-content-center">
-        <button type="button" class="button me-1 mb-2">Tasa RapiCambio</button>
-        <input id="index21" class="redondeado mb-2" [(ngModel)]="total" readonly>
-        <p class="mt-2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+        <button type="button" class="button me-1 mb-2 ">Tasa</button>
+        <input id="index21" class="redondeado " [(ngModel)]="total" readonly>
+        <p> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+
       </div>
 
       <!-- Formulario para seleccionar las tasas a restar -->
-      <div class="col-12 d-flex justify-content-center">
-        <button type="button" class="button me-1 mb-2">Cantidad a Cambiar</button>
-        <input type="number" id="index23" class="input mb-2 me-1" [(ngModel)]="index3" placeholder="0"
+      <div class="col-12 d-flex justify-content-center ">
+        <button type="button" class="button me-1 mb-2 ">Cant a Cambiar</button>
+        <input type="number" id="index23" class="input  me-1 " [(ngModel)]="index3" placeholder="0.00"
           (ngModelChange)="calculoBs()" (ngModelChange)="restarTasas(index1, index2)">
-        <p class="mt-2">USD</p>
+        <p class="mt-2 me">USD </p>
+
       </div>
 
       <div class="col-12 d-flex justify-content-center">
-        <button type="button" class="button me-1 mb-2" (click)="calculoBs()">Cantidad en Bs</button>
+        <button type="button" class="button me-1 mb-2" (click)="calculoBs()">Cant en Bs</button>
         <input id="index22" class="redondeado mb-2" [(ngModel)]="tasaTotal" readonly>
         <p class="mt-2"> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </p>
       </div>
@@ -133,7 +137,7 @@
       <div class="d-flex justify-content-center">
         <button type="button" class="button-email me-1 mb-2">Email</button>
         <input id="email" class="input-correo mb-2 me-1" [(ngModel)]="email" placeholder="example@gmail.com" required>
-        <p class="mt-2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+        <p class="mt-2">&nbsp; &nbsp; &nbsp; &nbsp;</p>
       </div>
 
       <!-- Botón para enviar email -->
