@@ -70,6 +70,16 @@
     text-align: center;
 
   }
+  .input1 {
+    border-radius: 5px;
+    width: 50px;
+    height: 40px;
+    padding: 2px 2px;
+    border: 1px solid #39c;    
+
+    text-align: center;
+
+  }
   .redondeado {
     border-radius: 5px;
     width: 100px;

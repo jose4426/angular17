@@ -47,6 +47,12 @@ export class HomeComponent implements OnInit {
   message: string = '';
   tasaRapi: number | null = null;
   messages: string[] = [];
+  bcv: number =36.63;
+  zelle: number =38.00;
+  panama: number =39.00;
+  selectedTasa = this.zelle; // Inicialmente seleccionamos BCV
+  totaltasa = this.selectedTasa;
+
 
   https: any;
 
@@ -56,10 +62,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkAuthentication();
-    this.updateBcv();
-    this.updateBtc();
     this.llenarData();
 
+  }
+  updateTotal() {
+    this.totaltasa = this.selectedTasa;
   }
   checkAuthentication() {
     const token = localStorage.getItem('token');
@@ -198,11 +205,14 @@ export class HomeComponent implements OnInit {
   }
 
   calculoTasa() {
-    if (this.lista && this.lista.length > 0) {
-      this.total = Number((this.lista[0].tasa * 1.02).toFixed(2));
-
+    if(this.selectedTasa == this.zelle) {
+      this.total =Number((this.zelle).toFixed(2));
+    }
+    else if  (this.selectedTasa == this.panama) {
+      this.total = this.panama ;
     }
   }
+
   restarTasas(index1: number, index2: number) {
 
     if (index1 >= 0 && index2 >= 0 && this.index3 !== null && this.total !== null) {
@@ -215,7 +225,7 @@ export class HomeComponent implements OnInit {
 
   calculoBs() {
     if (this.index3 !== null && this.total !== null) {
-      this.tasaTotal = Number((this.total * this.index3).toFixed(2));
+      this.tasaTotal = Number((this.totaltasa * this.index3).toFixed(2));
     }
   }
 
