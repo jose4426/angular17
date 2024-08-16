@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
   message: string = '';
   tasaRapi: number | null = null;
   messages: string[] = [];
-  bcv: number =36.63;
+  bcv: number =36.67;
   zelle: number =38.00;
   panama: number =39.00;
   selectedTasa = this.zelle; // Inicialmente seleccionamos BCV
