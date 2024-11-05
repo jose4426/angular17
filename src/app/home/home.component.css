@@ -196,13 +196,20 @@
     width: 100%; /* Para que ocupe todo el ancho */
     height: 400px; /* Ajusta a una altura uniforme */
     display: flex;
+    margin-top: 5%;
+    justify-content: center;
+    align-items:center
 
 
   }
   .carousel-item-img1 {
     width: 100%; /* Para que ocupe todo el ancho */
-    height: 400px; /* Ajusta a una altura uniforme */
+    height: 200px; /* Ajusta a una altura uniforme */
     object-fit: cover; /* Ajusta la imagen sin deformarla */
+    justify-content: center;
+    align-items:center
+
+    
   }
 
   .carousel-item .overlay {
