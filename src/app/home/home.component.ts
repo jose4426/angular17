@@ -13,6 +13,7 @@ import { EmailService } from '../email/email';
 import { ChatService } from '../chat/ChatService';
 
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -47,10 +48,10 @@ export class HomeComponent implements OnInit {
   message: string = '';
   tasaRapi: number | null = null;
   messages: string[] = [];
-  bcv: number =36.67;
-  zelle: number =38.00;
-  panama: number =39.00;
-  selectedTasa = this.zelle; // Inicialmente seleccionamos BCV
+  bcv: number =41.73;
+  zelle: number =44.00;
+  panama: number =45.00;
+  selectedTasa: number = this.zelle; // Inicialmente seleccionamos BCV
   totaltasa = this.selectedTasa;
 
 
@@ -206,7 +207,7 @@ export class HomeComponent implements OnInit {
 
   calculoTasa() {
     if(this.selectedTasa == this.zelle) {
-      this.total =Number((this.zelle).toFixed(2));
+      this.total =(this.zelle);
     }
     else if  (this.selectedTasa == this.panama) {
       this.total = this.panama ;
@@ -228,7 +229,7 @@ export class HomeComponent implements OnInit {
       this.tasaTotal = Number((this.totaltasa * this.index3).toFixed(2));
     }
   }
-
+ 
   sendEmail() {
     const to = "gonzalezjar231@gmail.com";
     const subject = 'Datos Calculados';
