@@ -306,3 +306,10 @@
   margin-left: auto;
   margin-right: auto;
 }
+.small-text {
+  font-size: 14px; /* Cambia este valor según el tamaño deseado */
+}
+
+select.small-text option {
+  font-size: 12px; /* Ajusta también las opciones del menú desplegable */
+}

@@ -1,7 +1,6 @@
 import { Component, OnInit, numberAttribute } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { ApiService } from '../service/api.service';
-import { ProductComponent } from '../product/product.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { productoInterface } from '../interface/product.interface';
@@ -11,13 +10,15 @@ import { FooterComponent } from '../footer/footer.component';
 import Swal from 'sweetalert2';
 import { EmailService } from '../email/email';
 import { ChatService } from '../chat/ChatService';
+import { DollarService } from '../scraping/scrapingServices';
+import { HttpClient } from '@angular/common/http';
 
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, ProductComponent, CommonModule, FormsModule, FooterComponent],
+  imports: [HeaderComponent, CommonModule, FormsModule, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -38,7 +39,6 @@ export class HomeComponent implements OnInit {
   tasaResta: number | null = null;
   index1: number = 0;
   index2: number = 0;
-  index3: number | null = null;
   index33: number | null = null;
   totalBs: number | null = null;
   totalBss: number | null = null;
@@ -48,24 +48,74 @@ export class HomeComponent implements OnInit {
   message: string = '';
   tasaRapi: number | null = null;
   messages: string[] = [];
-  bcv: number =41.73;
-  zelle: number =44.00;
-  panama: number =45.00;
+  bcv: number  | null = null ;
+  zelle: number =56.00;
+  panama: number =57.00;
+  promedio: number = 0 ;
+
   selectedTasa: number = this.zelle; // Inicialmente seleccionamos BCV
+  index3: number | null = null;
   totaltasa = this.selectedTasa;
+
+  valorDolar: number | null = null;  // Asegúrate de que sea un número
+  dollarData: number | null = null;
+  dollarParalelo: number | null = null;
 
 
   https: any;
 
-  constructor(private apiService: ApiService, private authService: AuthService, private router: Router, private emailService: EmailService, private chatService: ChatService) {
+  constructor( private scrapingServices: DollarService, private http: HttpClient, private apiService: ApiService, private authService: AuthService, private router: Router, private emailService: EmailService, private chatService: ChatService) {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.checkAuthentication();
-    this.llenarData();
+    //this.llenarData();
+
+    await this.fetchDollarData();
+    await this.fetchDollarParalelo();
+
+    this.promedios(); 
 
   }
+
+  async fetchDollarData(): Promise<void> {
+    try {
+      const data = await this.scrapingServices.getDollarData().toPromise();
+      this.dollarData = data.monitors.usd.price;
+      console.log('Datos del dólar BCV:', this.dollarData);
+    } catch (err) {
+      console.error('Error al obtener datos del dólar BCV:', err);
+    }
+  }
+  async fetchDollarParalelo(): Promise<void> {
+    try {
+      const data = await this.scrapingServices.getDollarParalelo().toPromise();
+      this.dollarParalelo = data.monitors.enparalelovzla.price;
+      console.log('Datos del dólar paralelo:', this.dollarParalelo);
+    } catch (err) {
+      console.error('Error al obtener datos del dólar paralelo:', err);
+    }
+
+  /*  this.scrapingServices.getDollarParalelo().subscribe({
+      const data = await this.scrapingServices.getDollarData().toPromise();
+
+      next: (data) => {
+        this.dollarParalelo = data.monitors.enparalelovzla.price;
+        console.log('Datos del dólar paralelo:', this.dollarParalelo);
+      },
+      error: (err) => {
+        console.error('Error al obtener datos del dólar:', err);
+      },
+    });*/
+  }
+  promedios(): void {
+    if (this.dollarData && this.dollarParalelo) {
+      this.promedio = (this.dollarParalelo + this.dollarData) / 2;
+    }
+    console.log('Promedio:', this.promedio);
+  }
+
   updateTotal() {
     this.totaltasa = this.selectedTasa;
   }
@@ -73,6 +123,7 @@ export class HomeComponent implements OnInit {
     const token = localStorage.getItem('token');
     this.isAuthenticated = !!token;
   }
+  
   logout() {
     this.authService.logout();
     this.isAuthenticated = false;
@@ -148,7 +199,6 @@ export class HomeComponent implements OnInit {
     this.productoAEliminar = producto;
     window.alert('decea eliminar el cambio');
 
-
     this.confirmarEliminar(producto.toString())
     this.refreshPage();
   }
@@ -212,6 +262,12 @@ export class HomeComponent implements OnInit {
     else if  (this.selectedTasa == this.panama) {
       this.total = this.panama ;
     }
+    else if  (this.selectedTasa == this.dollarData) {
+      this.total = this.dollarData ;
+    }
+    else if  (this.selectedTasa == this.dollarParalelo) {
+      this.total = this.dollarParalelo ;
+    }
   }
 
   restarTasas(index1: number, index2: number) {
@@ -225,9 +281,17 @@ export class HomeComponent implements OnInit {
   }
 
   calculoBs() {
-    if (this.index3 !== null && this.total !== null) {
-      this.tasaTotal = Number((this.totaltasa * this.index3).toFixed(2));
+    if (this.index3  && this.selectedTasa > 0) {
+      this.tasaTotal = this.selectedTasa * this.index3; // Multiplica la tasa por la cantidad en USD
+      console.log(`Tasa seleccionada: ${this.selectedTasa}, Cantidad USD: ${this.index3}, Bs calculados: ${this.tasaTotal}`);
+    } else {
+      this.tasaTotal = 0; // Si falta algún dato, resetea el resultado
     }
+  
+
+   /* if (this.index3  && this.selectedTasa > 0 ) {
+      this.tasaTotal = Number((this.totaltasa * this.index3).toFixed(2));
+    }*/
   }
  
   sendEmail() {
@@ -271,6 +335,20 @@ export class HomeComponent implements OnInit {
     textarea.style.height = 'auto'; // Restablecer la altura
     textarea.style.height = `${textarea.scrollHeight}px`; // Establecer la altura según la altura de desplazamiento
   }
-
+  validarSoloNumeros(event: any): void {
+    const input = event.target.value;
+  
+    // Expresión regular para permitir solo números (incluyendo decimales)
+    const numerosValidos = /^[0-9]*\.?[0-9]*$/;
+  
+    if (!numerosValidos.test(input)) {
+      // Si el valor ingresado no cumple con la regex, remueve el último carácter
+      event.target.value = input.slice(0, -1);
+    }
+  
+    // Actualiza el valor de `index3` después de validar
+    this.index3 = parseFloat(event.target.value) || 0;
+  }
+  
 
 }
