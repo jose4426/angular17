@@ -313,3 +313,10 @@
 select.small-text option {
   font-size: 12px; /* Ajusta también las opciones del menú desplegable */
 }
+
+.messages-area {
+  max-height: 100px; /* Ajusta la altura según necesites */
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  padding: 10px;
+  border-radius: 5px;
+}

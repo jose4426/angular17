@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "https://www.bcv.org.ve",
+      "target": "http://localhost:3000",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug",

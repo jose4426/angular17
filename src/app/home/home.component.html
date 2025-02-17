@@ -76,15 +76,16 @@
             <td *ngIf="isAuthenticated" class="d-flex justify-content-center">
             </td>
           </tr>
+       
           <tr>
-            <td class="text-center">Zelle</td>
-            <td class="text-center">{{zelle | number:'1.2-2'}}</td>
+            <td class="text-center">Promedio</td>
+            <td class="text-center">{{promedio | number:'1.2-2'}}</td>
             <td *ngIf="isAuthenticated" class="d-flex justify-content-center">
             </td>
           </tr>
           <tr>
-            <td class="text-center">Panama</td>
-            <td class="text-center">{{panama | number:'1.2-2'}}</td>
+            <td class="text-center">Paralelo</td>
+            <td class="text-center">{{dollarParalelo | number:'1.2-2'}}</td>
             <td *ngIf="isAuthenticated" class="d-flex justify-content-center">
             </td>
           </tr>
@@ -106,11 +107,11 @@
 
         <!-- Submenú para seleccionar la tasa -->
         <select class="input redondeado me-1 small-text"  [(ngModel)]="selectedTasa" (ngModelChange)="calculoBs()" >
-          <option [value]="zelle">Zelle {{zelle | number:'1.2-2'}}</option>
-          <option [value]="panama">Pan {{panama | number:'1.2-2'}}</option>
-          <option [value]="dollarData">Bcv {{dollarData | number:'1.2-2'}}</option>
-          <option [value]="dollarParalelo">Paral {{dollarParalelo | number:'1.2-2'}}</option>
-          <option [value]="promedio">prom {{promedio | number:'1.2-2'}}</option>
+          <option [value]="tasaZ">Zelle </option>
+          <option [value]="panama">Panama </option>
+          <option [value]="dollarData">Bcv </option>
+          <option [value]="dollarParalelo">Paralelo </option>
+          <option [value]="promedio">Promedio </option>
 
         </select>
 
@@ -126,9 +127,12 @@
         id="index23" 
         class="input redondeado me-1 " 
         [(ngModel)]="index3" 
-          placeholder="0.00"
+          
           (input)="validarSoloNumeros($event)"
-          (ngModelChange)="calculoBs()" >
+          (ngModelChange)="calculoBs()" 
+            (focus)="limpiarCampo()">
+
+          
           <!--(ngModelChange)="restarTasas(index1, index2)"-->
         <p class="mt-2 me-1">USD </p>
 
@@ -136,7 +140,7 @@
         <!--calculo de bs -->
       <div class="col-12 d-flex justify-content-center">
         <button type="button" class="button me-1 mb-2" (click)="calculoBs()">Cant en Bs</button>
-        <input id="index22" class="redondeado mb-2" [(ngModel)]="tasaTotal" readonly>
+        <input id="index22" class="redondeado mb-2" [value]="tasaTotal | number:'1.2-2'" readonly>
         <p class="mt-2"> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </p>
       </div>
 
@@ -157,15 +161,18 @@
         Crear Producto
       </button>
 
-      <div class="d-flex justify-content-center">
+      <!--div class="d-flex justify-content-center">
         <button type="button" class="button-email me-1 mb-2">Email</button>
         <input id="email" class="input-correo mb-2 me-1" [(ngModel)]="email" placeholder="example@gmail.com" required>
         <p class="mt-2">&nbsp; &nbsp; &nbsp; &nbsp;</p>
-      </div>
+      </div-->
+      <br>
 
       <!-- Botón para enviar email -->
       <div class="col-12 d-flex justify-content-center">
-        <button type="button" class="btn btn-primary me-1 mb-2" (click)="sendEmail()">Crear Orden</button>
+        <!--<button type="link" class="btn btn-primary me-1 mb-2"   >Crear Orden</button-->
+          <a class="btn btn-primary me-1 mb-2" aria-current="page" href="https://wa.me/+584121527049?text= Me indica la tasa de cambio, por favor">Crear Orden</a>
+
       </div>
 
       <div>
@@ -179,7 +186,8 @@
           </div>
           <div class="d-flex align-items-center">
             <textarea [(ngModel)]="message" placeholder="Escribe un mensaje" class="form-control me-1 input-message"
-              (input)="autoResize($event)" (keydown.enter)="sendMessage()" rows="1"></textarea>
+            (input)="autoResize($event)" (keydown.enter)="handleEnter($event)" rows="1"></textarea>
+            
             <button type="button" class="btn btn-primary button-send" (click)="sendMessage()">
               <i class="bi bi-send-fill"></i>
             </button>

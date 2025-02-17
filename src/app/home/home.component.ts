@@ -46,15 +46,21 @@ export class HomeComponent implements OnInit {
   isAuthenticated: boolean = false;  // Variable de estado de autenticación
   email: string | null = null;
   message: string = '';
+  visibleMessages: string[] = [];
+  hiddenMessages: string[] = [];
+  showAllMessages = false;
+
   tasaRapi: number | null = null;
   messages: string[] = [];
-  bcv: number  | null = null ;
-  zelle: number =56.00;
-  panama: number =57.00;
-  promedio: number = 0 ;
+  bcv: number | null = null;
+  zelle: number = 57.00;
+  panama: number = 58.00;
+  promedio: number = 0;
+  tasaZ: number | null = null;
 
-  selectedTasa: number = this.zelle; // Inicialmente seleccionamos BCV
-  index3: number | null = null;
+
+  selectedTasa = this.tasaZ;// Inicialmente seleccionamos Zelle
+  index3: number = 1.00;
   totaltasa = this.selectedTasa;
 
   valorDolar: number | null = null;  // Asegúrate de que sea un número
@@ -64,18 +70,26 @@ export class HomeComponent implements OnInit {
 
   https: any;
 
-  constructor( private scrapingServices: DollarService, private http: HttpClient, private apiService: ApiService, private authService: AuthService, private router: Router, private emailService: EmailService, private chatService: ChatService) {
+  constructor(private scrapingServices: DollarService, private http: HttpClient, private apiService: ApiService, private authService: AuthService, private router: Router, private emailService: EmailService, private chatService: ChatService) {
 
   }
 
   async ngOnInit(): Promise<void> {
-    this.checkAuthentication();
-    //this.llenarData();
-
+    //this.checkAuthentication();
     await this.fetchDollarData();
     await this.fetchDollarParalelo();
 
-    this.promedios(); 
+    this.promedios();
+    this.tasa();
+    this.selectedTasa = this.tasaZ;
+    this.calculoBs();
+    const savedMessages = localStorage.getItem('chatMessages');
+    if (savedMessages) {
+      this.messages = JSON.parse(savedMessages);
+    } else {
+      this.messages = [];
+    }
+    this.updateMessageView();
 
   }
 
@@ -83,7 +97,6 @@ export class HomeComponent implements OnInit {
     try {
       const data = await this.scrapingServices.getDollarData().toPromise();
       this.dollarData = data.monitors.usd.price;
-      console.log('Datos del dólar BCV:', this.dollarData);
     } catch (err) {
       console.error('Error al obtener datos del dólar BCV:', err);
     }
@@ -92,60 +105,57 @@ export class HomeComponent implements OnInit {
     try {
       const data = await this.scrapingServices.getDollarParalelo().toPromise();
       this.dollarParalelo = data.monitors.enparalelovzla.price;
-      console.log('Datos del dólar paralelo:', this.dollarParalelo);
     } catch (err) {
       console.error('Error al obtener datos del dólar paralelo:', err);
     }
 
-  /*  this.scrapingServices.getDollarParalelo().subscribe({
-      const data = await this.scrapingServices.getDollarData().toPromise();
 
-      next: (data) => {
-        this.dollarParalelo = data.monitors.enparalelovzla.price;
-        console.log('Datos del dólar paralelo:', this.dollarParalelo);
-      },
-      error: (err) => {
-        console.error('Error al obtener datos del dólar:', err);
-      },
-    });*/
   }
   promedios(): void {
-    if (this.dollarData && this.dollarParalelo) {
+    if (this.dollarData !== null && this.dollarParalelo !== null) {
       this.promedio = (this.dollarParalelo + this.dollarData) / 2;
     }
-    console.log('Promedio:', this.promedio);
+    else ("error al ingrrser dolar data o dolar paralelo")
   }
 
-  updateTotal() {
-    this.totaltasa = this.selectedTasa;
+
+  tasa() {
+    if (this.dollarData !== null) {
+      this.tasaZ = this.dollarData * 1.02;
+      //this.selectedTasa = this.tasaZ; // Actualizar el valor predeterminado
+    }
   }
+  /*updateTotal() {
+    this.totaltasa = this.selectedTasa;
+  }*/
+  /*
   checkAuthentication() {
     const token = localStorage.getItem('token');
     this.isAuthenticated = !!token;
   }
-  
+
   logout() {
     this.authService.logout();
     this.isAuthenticated = false;
     this.router.navigate(['/login']);
-  }
-
-  llenarData() {
-
-    this.apiService.getProducts().subscribe({
-      next: (data) => {
-        this.lista = data;
-        this.calculoTasa();
-
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-
-    })
-    this.calculoTasa();
-
-  }
+  }*/
+  /*
+    llenarData() {
+  
+      this.apiService.getProducts().subscribe({
+        next: (data) => {
+          this.lista = data;
+          this.calculoTasa();
+  
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+  
+      })
+      this.calculoTasa();
+  
+    }*/
 
   insertarProducto() {
     const data: Partial<productoInterface> = {
@@ -183,23 +193,23 @@ export class HomeComponent implements OnInit {
       tasa: 0
     };
   }
-  confirmarEliminar(id: string): void {
-    this.apiService.delete(id).subscribe(
-      () => {
-        console.log('Elemento eliminado exitosamente');
-        this.llenarData();
-      },
-      (error) => {
-        console.error('Error al eliminar el elemento:', error);
-      }
-    );
-  }
+  /*  confirmarEliminar(id: string): void {
+      this.apiService.delete(id).subscribe(
+        () => {
+          console.log('Elemento eliminado exitosamente');
+          this.llenarData();
+        },
+        (error) => {
+          console.error('Error al eliminar el elemento:', error);
+        }
+      );
+    }*/
   mostrarModalEliminar(producto: productoInterface) {
     console.log("entro en el boton eliminar ")
     this.productoAEliminar = producto;
     window.alert('decea eliminar el cambio');
 
-    this.confirmarEliminar(producto.toString())
+    // this.confirmarEliminar(producto.toString())
     this.refreshPage();
   }
 
@@ -233,40 +243,40 @@ export class HomeComponent implements OnInit {
     }
 
   }
-
-  updateBcv() {
-
-    this.apiService.updateBcv().subscribe(
-    );
-
-  }
-  updateBtc() {
-
-    this.apiService.updateBtc().subscribe(
-
-    );
-
-  }
-
-  cancelarEdicion() {
-    this.refreshPage()
-  }
+  /*
+    updateBcv() {
+  
+      this.apiService.updateBcv().subscribe(
+      );
+  
+    }
+    updateBtc() {
+  
+      this.apiService.updateBtc().subscribe(
+  
+      );
+  
+    }
+  
+    cancelarEdicion() {
+      this.refreshPage()
+    }*/
   refreshPage() {
     window.location.reload();
   }
 
   calculoTasa() {
-    if(this.selectedTasa == this.zelle) {
-      this.total =(this.zelle);
+    if (this.selectedTasa == this.tasaZ) {
+      this.total = (this.tasaZ);
     }
-    else if  (this.selectedTasa == this.panama) {
-      this.total = this.panama ;
+    else if (this.selectedTasa == this.panama) {
+      this.total = this.panama;
     }
-    else if  (this.selectedTasa == this.dollarData) {
-      this.total = this.dollarData ;
+    else if (this.selectedTasa == this.dollarData) {
+      this.total = this.dollarData;
     }
-    else if  (this.selectedTasa == this.dollarParalelo) {
-      this.total = this.dollarParalelo ;
+    else if (this.selectedTasa == this.dollarParalelo) {
+      this.total = this.dollarParalelo;
     }
   }
 
@@ -281,53 +291,51 @@ export class HomeComponent implements OnInit {
   }
 
   calculoBs() {
-    if (this.index3  && this.selectedTasa > 0) {
+    if (this.index3 && this.selectedTasa) {
       this.tasaTotal = this.selectedTasa * this.index3; // Multiplica la tasa por la cantidad en USD
-      console.log(`Tasa seleccionada: ${this.selectedTasa}, Cantidad USD: ${this.index3}, Bs calculados: ${this.tasaTotal}`);
     } else {
       this.tasaTotal = 0; // Si falta algún dato, resetea el resultado
     }
+
+
+  }
+  /*
+    sendEmail() {
+      const to = "gonzalezjar231@gmail.com";
+      const subject = 'Datos Calculados';
+      if (this.email !== null) {
+        const text = `Tasa: ${this.total}\nCantidad a Cambiar: ${this.index3}\nTotal en Bs: ${this.tasaTotal}\nEmail: ${this.email}`;
   
-
-   /* if (this.index3  && this.selectedTasa > 0 ) {
-      this.tasaTotal = Number((this.totaltasa * this.index3).toFixed(2));
-    }*/
-  }
- 
-  sendEmail() {
-    const to = "gonzalezjar231@gmail.com";
-    const subject = 'Datos Calculados';
-    if (this.email !== null) {
-      const text = `Tasa: ${this.total}\nCantidad a Cambiar: ${this.index3}\nTotal en Bs: ${this.tasaTotal}\nEmail: ${this.email}`;
-
-      this.emailService.sendEmail(to, subject, text).subscribe(response => {
-        console.log('Email sent successfully', response);
-
-      }
-        , error => {
-          console.log('Error sending email', error);
-        });
-      Swal.fire({
-        title: '¡Su orden fue creado con oc con éxito!',
-        text: 'Serás redirigido en breve...',
-        icon: 'success',
-        timer: 3000,
-        timerProgressBar: true,
-        willClose: () => {
-          this.refreshPage();
+        this.emailService.sendEmail(to, subject, text).subscribe(response => {
+          console.log('Email sent successfully', response);
+  
         }
-      });
-
-    } else
-
-      window.alert('!Tiene que agregar un correo electronico');
-
-  }
+          , error => {
+            console.log('Error sending email', error);
+          });
+        Swal.fire({
+          title: '¡Su orden fue creado con oc con éxito!',
+          text: 'Serás redirigido en breve...',
+          icon: 'success',
+          timer: 3000,
+          timerProgressBar: true,
+          willClose: () => {
+            this.refreshPage();
+          }
+        });
+  
+      } else
+  
+        window.alert('!Tiene que agregar un correo electronico');
+  
+    }*/
 
   sendMessage() {
     if (this.message.trim()) {
-      this.messages.push(this.message);
+      this.messages.unshift(this.message);
+      localStorage.setItem('chatMessages', JSON.stringify(this.messages)); // Guardar en localStorage
       this.message = '';
+      this.updateMessageView();
     }
   }
   autoResize(event: Event) {
@@ -335,20 +343,45 @@ export class HomeComponent implements OnInit {
     textarea.style.height = 'auto'; // Restablecer la altura
     textarea.style.height = `${textarea.scrollHeight}px`; // Establecer la altura según la altura de desplazamiento
   }
+  updateMessageView() {
+    if (this.showAllMessages) {
+      this.visibleMessages = [...this.messages];
+      this.hiddenMessages = [];
+    } else {
+      this.visibleMessages = this.messages.slice(-4); // Muestra solo los últimos 4
+      this.hiddenMessages = this.messages.slice(0, -4); // Mensajes ocultos
+    }
+  }
+
+  handleEnter(event: any): void {
+    const keyboardEvent = event as KeyboardEvent;  // Forzamos el tipo a KeyboardEvent
+    keyboardEvent.preventDefault();
+    this.sendMessage();
+  }
+
   validarSoloNumeros(event: any): void {
-    const input = event.target.value;
-  
+    let input = event.target.value;
+
     // Expresión regular para permitir solo números (incluyendo decimales)
     const numerosValidos = /^[0-9]*\.?[0-9]*$/;
-  
+
+    // Verifica si el valor cumple con la expresión regular
     if (!numerosValidos.test(input)) {
-      // Si el valor ingresado no cumple con la regex, remueve el último carácter
-      event.target.value = input.slice(0, -1);
+      // Si el valor ingresado no cumple, remueve el último carácter
+      input = input.slice(0, -1);
     }
-  
-    // Actualiza el valor de `index3` después de validar
-    this.index3 = parseFloat(event.target.value) || 0;
+
+    // Elimina ceros iniciales, excepto si es "0." para valores decimales
+    if (input.startsWith('0') && input !== '0.') {
+      input = input.replace(/^0+/, ''); // Remueve todos los ceros iniciales
+    }
+
+    // Asigna el valor corregido al campo y actualiza `index3`
+    event.target.value = input;
+    this.index3 = parseFloat(input) || 0; // Convierte el valor a número o asigna 0
   }
-  
+  limpiarCampo() {
+    this.index3 = '' as unknown as number; // O puedes usar '' si prefieres un input vacío
+  }
 
 }
