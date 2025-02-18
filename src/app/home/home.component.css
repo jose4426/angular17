@@ -280,7 +280,6 @@
     overflow: hidden;
   }
   
-  /* Evita que el header se sobreponga a las imágenes */
   .header {
     z-index: 10;
     position: relative;
