@@ -204,7 +204,7 @@
   }
   .carousel-item-img1 {
     width: 100%; /* Para que ocupe todo el ancho */
-    height: 200px; /* Ajusta a una altura uniforme */
+    height: 300px; /* Ajusta a una altura uniforme */
     object-fit: cover; /* Ajusta la imagen sin deformarla */
     justify-content: center;
     align-items:center
@@ -272,13 +272,11 @@
   }
   @media (min-width: 992px) {
     .carousel-inner {
-      max-height: 700px; /* Aumenta la altura para pantallas grandes */
+      max-height: 600px; /* Aumenta la altura para pantallas grandes */
     }
   }
-
-  
   .carousel-inner {
-    max-height: 500px; /* Ajusta la altura máxima según lo necesario */
+    max-height: 400px; /* Ajusta la altura máxima según lo necesario */
     overflow: hidden;
   }
   
