@@ -131,7 +131,6 @@
           (input)="validarSoloNumeros($event)"
           (ngModelChange)="calculoBs()" 
             (focus)="limpiarCampo()">
-
           
           <!--(ngModelChange)="restarTasas(index1, index2)"-->
         <p class="mt-2 me-1">USD </p>
@@ -170,8 +169,10 @@
 
       <!-- Botón para enviar email -->
       <div class="col-12 d-flex justify-content-center">
-        <!--<button type="link" class="btn btn-primary me-1 mb-2"   >Crear Orden</button-->
-          <a class="btn btn-primary me-1 mb-2" aria-current="page" href="https://wa.me/+584121527049?text= Me indica la tasa de cambio, por favor">Crear Orden</a>
+        <!--<button type="link" class="btn btn-primary me-1 mb-2" >Crear Orden</button-->
+          <a class="btn btn-primary me-1 mb-2" aria-current="page" 
+          [href]="'https://wa.me/' + numeroWhatsApp + '?text='+'Tipo de cambio: '+ selectedTasa+ ',' + ' Cantidad: '+ index3 +',' + ' TotalBs: ' + tasaTotal"
+          >Crear Orden</a>
 
       </div>
 

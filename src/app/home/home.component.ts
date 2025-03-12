@@ -66,6 +66,9 @@ export class HomeComponent implements OnInit {
   valorDolar: number | null = null;  // Asegúrate de que sea un número
   dollarData: number | null = null;
   dollarParalelo: number | null = null;
+  tasaCambioMensaje: string =  "Me indica la tasa de cambio, por favor";
+  numeroWhatsApp: string= "+584121527049";
+  whatsappUrl: string = "";
 
 
   https: any;
@@ -115,7 +118,7 @@ export class HomeComponent implements OnInit {
     if (this.dollarData !== null && this.dollarParalelo !== null) {
       this.promedio = (this.dollarParalelo + this.dollarData) / 2;
     }
-    else ("error al ingrrser dolar data o dolar paralelo")
+    else ("error al ingresar dollar data o dollar paralelo")
   }
 
 
@@ -384,4 +387,11 @@ export class HomeComponent implements OnInit {
     this.index3 = '' as unknown as number; // O puedes usar '' si prefieres un input vacío
   }
 
+  generarWhatsAppUrl() {
+    this.whatsappUrl = `https://wa.me/${this.numeroWhatsApp}?text=${encodeURIComponent(
+      `Tipo de cambio: ${this.tasaZ}\nCantidad: ${this.selectedTasa}\nTotalBs: ${this.tasaTotal}`
+    )}`;
+    console.log("WhatsApp URL:", this.whatsappUrl); // Verifica la URL en la consola
+
+  }
 }
