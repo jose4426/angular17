@@ -12,6 +12,7 @@ import { EmailService } from '../email/email';
 import { ChatService } from '../chat/ChatService';
 import { DollarService } from '../scraping/scrapingServices';
 import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 
 
@@ -66,6 +67,7 @@ export class HomeComponent implements OnInit {
   valorDolar: number | null = null;  // Asegúrate de que sea un número
   dollarData: number | null = null;
   dollarParalelo: number | null = null;
+  euro: number | null = null;
   tasaCambioMensaje: string =  "Me indica la tasa de cambio, por favor";
   numeroWhatsApp: string= "+584121527049";
   whatsappUrl: string = "";
@@ -81,10 +83,10 @@ export class HomeComponent implements OnInit {
     //this.checkAuthentication();
     await this.fetchDollarData();
     await this.fetchDollarParalelo();
-
+    await this.fetchEuro()
     this.promedios();
     this.tasa();
-    this.selectedTasa = this.tasaZ;
+    this.selectedTasa = this.dollarData;
     this.calculoBs();
     const savedMessages = localStorage.getItem('chatMessages');
     if (savedMessages) {
@@ -98,22 +100,37 @@ export class HomeComponent implements OnInit {
 
   async fetchDollarData(): Promise<void> {
     try {
-      const data = await this.scrapingServices.getDollarData().toPromise();
-      this.dollarData = data.monitors.usd.price;
+      const data = await firstValueFrom(this.scrapingServices.getDollarData());
+
+          console.log('Respuesta API:', data);
+      this.dollarData = data[0].promedio;
+
     } catch (err) {
+      console.log('data:',this.dollarData);
       console.error('Error al obtener datos del dólar BCV:', err);
     }
   }
   async fetchDollarParalelo(): Promise<void> {
     try {
-      const data = await this.scrapingServices.getDollarParalelo().toPromise();
-      this.dollarParalelo = data.monitors.enparalelovzla.price;
+      const data = await firstValueFrom(this.scrapingServices.getDollarParalelo());
+      this.dollarParalelo = data.promedio;
     } catch (err) {
       console.error('Error al obtener datos del dólar paralelo:', err);
     }
 
 
   }
+  async fetchEuro(): Promise<void> {
+    try {
+      const data = await firstValueFrom(this.scrapingServices.getDollarData());
+      this.euro = data[1].promedio;
+    } catch (err) {
+      console.error('Error al obtener datos del dólar paralelo:', err);
+    }
+
+
+  }
+
   promedios(): void {
     if (this.dollarData !== null && this.dollarParalelo !== null) {
       this.promedio = (this.dollarParalelo + this.dollarData) / 2;
@@ -123,8 +140,8 @@ export class HomeComponent implements OnInit {
 
 
   tasa() {
-    if (this.dollarData !== null) {
-      this.tasaZ = this.dollarData * 1.02;
+    if (this.dollarParalelo !== null) {
+      this.tasaZ = this.dollarParalelo *0.88;
       //this.selectedTasa = this.tasaZ; // Actualizar el valor predeterminado
     }
   }
@@ -296,11 +313,17 @@ export class HomeComponent implements OnInit {
   calculoBs() {
     if (this.index3 && this.selectedTasa) {
       this.tasaTotal = this.selectedTasa * this.index3; // Multiplica la tasa por la cantidad en USD
+      this.tasaTotal = parseFloat(this.tasaTotal.toFixed(2));
     } else {
-      this.tasaTotal = 0; // Si falta algún dato, resetea el resultado
+      //this.tasaTotal = 0; // Si falta algún dato, resetea el resultado
     }
+  }
 
 
+  calculoUsd() {
+    if (!this.tasaTotal || !this.selectedTasa) return;
+    this.index3 = this.tasaTotal / this.selectedTasa;
+    this.index3 = parseFloat(this.index3.toFixed(2));
   }
   /*
     sendEmail() {

@@ -78,14 +78,14 @@
           </tr>
        
           <tr>
-            <td class="text-center">Promedio</td>
-            <td class="text-center">{{promedio | number:'1.2-2'}}</td>
+            <td class="text-center">Euro</td>
+            <td class="text-center">{{euro | number:'1.2-2'}}</td>
             <td *ngIf="isAuthenticated" class="d-flex justify-content-center">
             </td>
           </tr>
           <tr>
-            <td class="text-center">Paralelo</td>
-            <td class="text-center">{{dollarParalelo | number:'1.2-2'}}</td>
+            <td class="text-center">Zelle</td>
+            <td class="text-center">{{tasaZ | number:'1.2-2'}}</td>
             <td *ngIf="isAuthenticated" class="d-flex justify-content-center">
             </td>
           </tr>
@@ -107,11 +107,11 @@
 
         <!-- Submenú para seleccionar la tasa -->
         <select class="input redondeado me-1 small-text"  [(ngModel)]="selectedTasa" (ngModelChange)="calculoBs()" >
-          <option [value]="tasaZ">Zelle </option>
-          <option [value]="panama">Panama </option>
           <option [value]="dollarData">Bcv </option>
-          <option [value]="dollarParalelo">Paralelo </option>
-          <option [value]="promedio">Promedio </option>
+          <option [value]="euro">Euro </option>
+          <option [value]="tasaZ">Zelle </option>
+          <option [value]="tasaZ">Panama </option>
+          <option [value]="dollarParalelo">Binance </option>
 
         </select>
 
@@ -136,10 +136,13 @@
         <p class="mt-2 me-1">USD </p>
 
       </div>
-        <!--calculo de bs -->
+      <!--calculo de bs -->
       <div class="col-12 d-flex justify-content-center">
         <button type="button" class="button me-1 mb-2" (click)="calculoBs()">Cant en Bs</button>
-        <input id="index22" class="redondeado mb-2" [value]="tasaTotal | number:'1.2-2'" readonly>
+
+        <!--input id="index22" class="redondeado mb-2" [value]="tasaTotal | number:'1.2-2'" readonly-->
+        <input type="number 1-2"  id="index22" class="input redondeado mb-2" [(ngModel)]="tasaTotal" (input)="calculoUsd()"
+          [value]="tasaTotal ">
         <p class="mt-2"> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </p>
       </div>
 

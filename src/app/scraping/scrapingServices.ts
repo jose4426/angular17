@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DollarService {
-  private apiUrl = 'https://pydolarve.org/api/v1/dollar?page=bcv';
-  private apiUrlp = 'https://pydolarve.org/api/v1/dollar?page=enparalelovzla';
+  private apiUrl = 'https://ve.dolarapi.com/v1/cotizaciones';
+  private apiUrlp = 'https://ve.dolarapi.com/v1/dolares/paralelo';
 
   constructor(private http: HttpClient) {}
 
