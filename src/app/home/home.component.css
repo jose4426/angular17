@@ -317,3 +317,14 @@ select.small-text option {
   padding: 10px;
   border-radius: 5px;
 }
+.whatsapp-btn {
+  background-color: #25D366;
+  border-color: #25D366;
+  color: white;
+}
+
+.whatsapp-btn:hover {
+  background-color: #1EBE5D;
+  border-color: #1EBE5D;
+  color: white;
+}

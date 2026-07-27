@@ -417,4 +417,13 @@ export class HomeComponent implements OnInit {
     console.log("WhatsApp URL:", this.whatsappUrl); // Verifica la URL en la consola
 
   }
+get whatsappUrl1(): string {
+  const texto =
+`
+Mensaje:
+${this.message}`;
+
+  return `https://wa.me/${this.numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
+}
+
 }
