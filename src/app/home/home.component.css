@@ -1,322 +1,375 @@
 .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .modal {
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
-  }
+.modal {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
 
-  .modal-footer {
-    border-top: 1px solid #e9ecef;
-    text-align: right;
-  }
+.modal-footer {
+  border-top: 1px solid #e9ecef;
+  text-align: right;
+}
 
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .modal-body {
-    padding: 15px;
-  }
+.modal-body {
+  padding: 15px;
+}
 
-  .close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    line-height: 1;
-    color: #000;
-    cursor: pointer;
-  }
-  .button {
-    background-color: rgb(11, 94, 215); /* Green */
-    width: 150px;
-    height: 40px;
-    border: none;
-    color: white;
-    padding: 2px 2px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-  }
-  .input {
-    border-radius: 5px;
-    width: 100px;
-    height: 40px;
-    padding: 2px 2px;
-    border: 1px solid #39c;    
+.close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #000;
+  cursor: pointer;
+}
 
-    text-align: center;
+.button {
+  background-color: rgb(11, 94, 215);
+  /* Green */
+  width: 150px;
+  height: 40px;
+  border: none;
+  color: white;
+  padding: 2px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+}
 
-  }
-  .input1 {
-    border-radius: 5px;
-    width: 50px;
-    height: 40px;
-    padding: 2px 2px;
-    border: 1px solid #39c;    
+.input {
+  border-radius: 5px;
+  width: 100px;
+  height: 40px;
+  padding: 2px 2px;
+  border: 1px solid #39c;
 
-    text-align: center;
+  text-align: center;
 
-  }
-  .redondeado {
-    border-radius: 5px;
-    width: 100px;
-    height: 40px;
-    color: black;
-    padding: 2px 2px;
-    border: 1px solid #39c;
-    text-align: center;
-    background-color: #EEEE;
+}
 
-  }
-  .input-correo {
-    border-radius: 5px;
-    width: 190px;
-    height: 40px;
-    color: black;
-    padding: 2px 2px;
-    border: 1px solid #39c;
-    text-align: center;
-    background-color: #EEEE;
+.input1 {
+  border-radius: 5px;
+  width: 50px;
+  height: 40px;
+  padding: 2px 2px;
+  border: 1px solid #39c;
 
-  }
-  .button-email {
-    background-color: rgb(11, 94, 215); /* Green */
-    width: 60px;
-    height: 40px;
-    border: none;
-    color: white;
-    padding: 2px 2px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-  }
+  text-align: center;
 
-  .button-send {
-    background-color: #25D366; /* Green */
-    width: 40px;
-    height: 40px;
-    border: none;
-    color: white;
-    padding: 2px 2px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
+}
 
-  }
-  .redondeado-msj {
-    background-color: #25D366; /* Green */
-    width: 200px;
-    height: 40px;
-    position: -ms-page;
-    border: none;
-    color: white;
-    padding: 2px 2px;
-    text-align: center;
-    text-decoration: none;
-    display: -moz-inline-box;
-    font-size: 16px;
-    border-radius: 5px;
-    align-content: end;
-  }
-  .chat-container {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 600px;
-    margin: auto;
-  }
-  
-  .message-bubble {
-    background-color: #e9ecef;
-    border-radius: 10px;
-    padding: 2px;
-    margin-bottom: 5px;
-    display: block; /* Asegura que cada burbuja de mensaje ocupe una línea completa */
-    max-width: fit-content; /* Ajusta la burbuja al contenido */
-    word-wrap: break-word;
-    text-align: left; /* Alinear el texto a la izquierda */
-    size: 3cm;
-  }
-  
-  
-  .message-text {
-    margin: 0;
-  }
-  
-  .input-message {
-    flex: 1;
-    resize: none; /* Prevenir el redimensionamiento por defecto */
-    overflow: hidden; /* Ocultar la barra de desplazamiento */
-  }
-  
-  .button-send {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 12px;
-  }
-  
-  .button-ganancia {
-    background-color: rgb(11, 94, 215); /* Green */
-    width: 80px;
-    height: 40px;
-    border: none;
-    color: white;
-    padding: 2px 2px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-  }
-  .carousel-item img {
-    margin: auto;
+.redondeado {
+  border-radius: 5px;
+  width: 100px;
+  height: 40px;
+  color: black;
+  padding: 2px 2px;
+  border: 1px solid #39c;
+  text-align: center;
+  background-color: #EEEE;
 
-    width: 100%; /* Para que ocupe todo el ancho */
-    height: 400px; /* Ajusta a una altura uniforme */
-    display: flex;
-    margin-top: 5%;
-    justify-content: center;
-    align-items:center
+}
+
+.input-correo {
+  border-radius: 5px;
+  width: 190px;
+  height: 40px;
+  color: black;
+  padding: 2px 2px;
+  border: 1px solid #39c;
+  text-align: center;
+  background-color: #EEEE;
+
+}
+
+.button-email {
+  background-color: rgb(11, 94, 215);
+  /* Green */
+  width: 60px;
+  height: 40px;
+  border: none;
+  color: white;
+  padding: 2px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.button-send {
+  background-color: #25D366;
+  /* Green */
+  width: 40px;
+  height: 40px;
+  border: none;
+  color: white;
+  padding: 2px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+
+}
+
+.redondeado-msj {
+  background-color: #25D366;
+  /* Green */
+  width: 200px;
+  height: 40px;
+  position: -ms-page;
+  border: none;
+  color: white;
+  padding: 2px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: -moz-inline-box;
+  font-size: 16px;
+  border-radius: 5px;
+  align-content: end;
+}
+
+.chat-container {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.message-bubble {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  padding: 2px;
+  margin-bottom: 5px;
+  display: block;
+  /* Asegura que cada burbuja de mensaje ocupe una línea completa */
+  max-width: fit-content;
+  /* Ajusta la burbuja al contenido */
+  word-wrap: break-word;
+  text-align: left;
+  /* Alinear el texto a la izquierda */
+  size: 3cm;
+}
 
 
-  }
-  .carousel-item-img1 {
-    width: 100%; /* Para que ocupe todo el ancho */
-    height: 300px; /* Ajusta a una altura uniforme */
-    object-fit: cover; /* Ajusta la imagen sin deformarla */
-    justify-content: center;
-    align-items:center
+.message-text {
+  margin: 0;
+}
 
-    
-  }
+.input-message {
+  flex: 1;
+  resize: none;
+  /* Prevenir el redimensionamiento por defecto */
+  overflow: hidden;
+  /* Ocultar la barra de desplazamiento */
+}
 
-  .carousel-item .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-  
-  .carousel-item:hover .overlay {
-    opacity: 1;
-  }
- 
-  .small-text {
-    font-size: 12px; /* Puedes ajustar el tamaño según lo que necesites */
-  }
-  .reduced-spacing {
-    margin-top: 1px;   /* Reduce el margen superior */
-    margin-bottom: 1px; /* Reduce el margen inferior */
-  }
+.button-send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+}
 
-  .fixed-size-button {
-    width: 100px; /* Ancho fijo */
-    height: 40px; /* Alto fijo */
-    background-color: #007bff; /* Color de fondo (azul) */
-    color: white; /* Color del texto */
-    border-radius: 5px; /* Bordes redondeados (opcional) */
-    border: none; /* Quitar borde */
-  }
-  
-  .fixed-size-button:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el mouse (opcional) */
-  }
+.button-ganancia {
+  background-color: rgb(11, 94, 215);
+  /* Green */
+  width: 80px;
+  height: 40px;
+  border: none;
+  color: white;
+  padding: 2px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+}
 
-  .fixed-size-button1 {
-    width: 100px; /* Ancho fijo */
-    height: 40px; /* Alto fijo */
-    background-color: #007bff; /* Color de fondo (azul) */
-    color: white; /* Color del texto */
-    border-radius: 5px; /* Bordes redondeados (opcional) */
-    border: none; /* Quitar borde */
-  }
+.carousel-item img {
+  margin: auto;
 
-  .container {
-    width: 100%; /* Asegura que el contenedor se ajuste al 100% del ancho disponible */
-  }
-  .d-flex {
-    display: flex;
-  }
-  .justify-content-center {
-    justify-content: center;
-  }
-  @media (min-width: 992px) {
-    .carousel-inner {
-      max-height: 600px; /* Aumenta la altura para pantallas grandes */
-    }
-  }
+  width: 100%;
+  /* Para que ocupe todo el ancho */
+  height: 400px;
+  /* Ajusta a una altura uniforme */
+  display: flex;
+  margin-top: 5%;
+  justify-content: center;
+  align-items: center
+}
+
+.carousel-item-img1 {
+  width: 100%;
+  /* Para que ocupe todo el ancho */
+  height: 300px;
+  /* Ajusta a una altura uniforme */
+  object-fit: cover;
+  /* Ajusta la imagen sin deformarla */
+  justify-content: center;
+  align-items: center
+}
+
+.carousel-item .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.carousel-item:hover .overlay {
+  opacity: 1;
+}
+
+.small-text {
+  font-size: 12px;
+  /* Puedes ajustar el tamaño según lo que necesites */
+}
+
+.reduced-spacing {
+  margin-top: 1px;
+  /* Reduce el margen superior */
+  margin-bottom: 1px;
+  /* Reduce el margen inferior */
+}
+
+.fixed-size-button {
+  width: 100px;
+  /* Ancho fijo */
+  height: 40px;
+  /* Alto fijo */
+  background-color: #007bff;
+  /* Color de fondo (azul) */
+  color: white;
+  /* Color del texto */
+  border-radius: 5px;
+  /* Bordes redondeados (opcional) */
+  border: none;
+  /* Quitar borde */
+}
+
+.fixed-size-button:hover {
+  background-color: #0056b3;
+  /* Color de fondo al pasar el mouse (opcional) */
+}
+
+.fixed-size-button1 {
+  width: 100px;
+  /* Ancho fijo */
+  height: 40px;
+  /* Alto fijo */
+  background-color: #007bff;
+  /* Color de fondo (azul) */
+  color: white;
+  /* Color del texto */
+  border-radius: 5px;
+  /* Bordes redondeados (opcional) */
+  border: none;
+  /* Quitar borde */
+}
+
+.container {
+  width: 100%;
+  /* Asegura que el contenedor se ajuste al 100% del ancho disponible */
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+@media (min-width: 992px) {
   .carousel-inner {
-    max-height: 400px; /* Ajusta la altura máxima según lo necesario */
-    overflow: hidden;
+    max-height: 600px;
+    /* Aumenta la altura para pantallas grandes */
   }
-  
-  .header {
-    z-index: 10;
-    position: relative;
-  }
-  
-  /* Asegura que el overlay esté bien posicionado */
-  .overlay {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    background: rgba(0, 0, 0, 0.5); /* Añade un fondo semitransparente */
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 20;
-  }
-  col-md-6 {
+}
+
+.carousel-inner {
+  max-height: 400px;
+  /* Ajusta la altura máxima según lo necesario */
+  overflow: hidden;
+}
+
+.header {
+  z-index: 10;
+  position: relative;
+}
+
+/* Asegura que el overlay esté bien posicionado */
+.overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+  /* Añade un fondo semitransparente */
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 20;
+}
+
+col-md-6 {
   width: 50%;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
+
 .small-text {
-  font-size: 14px; /* Cambia este valor según el tamaño deseado */
+  font-size: 14px;
+  /* Cambia este valor según el tamaño deseado */
 }
 
 select.small-text option {
-  font-size: 12px; /* Ajusta también las opciones del menú desplegable */
+  font-size: 12px;
+  /* Ajusta también las opciones del menú desplegable */
 }
 
 .messages-area {
-  max-height: 100px; /* Ajusta la altura según necesites */
-  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  max-height: 100px;
+  /* Ajusta la altura según necesites */
+  overflow-y: auto;
+  /* Habilita el desplazamiento vertical */
   padding: 10px;
   border-radius: 5px;
 }
+
 .whatsapp-btn {
   background-color: #25D366;
   border-color: #25D366;
@@ -327,4 +380,45 @@ select.small-text option {
   background-color: #1EBE5D;
   border-color: #1EBE5D;
   color: white;
+}
+
+.button-tasa{
+    background-color: rgb(11, 94, 215);
+
+    height:42px;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.button {
+  background-color: rgb(11, 94, 215);
+  /* Green */
+  width: 150px;
+  height: 40px;
+  border: none;
+  color: white;
+  padding: 2px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+
+
+
+.input-tasa{
+    height:42px;
+    text-align:center;
+    border-radius:8px;
+}
+
+.unidad-tasa{
+    display:flex;
+    align-items:center;
+    height:42px;
+    font-weight:bold;
 }

@@ -68,8 +68,8 @@ export class HomeComponent implements OnInit {
   dollarData: number | null = null;
   dollarParalelo: number | null = null;
   euro: number | null = null;
-  tasaCambioMensaje: string =  "Me indica la tasa de cambio, por favor";
-  numeroWhatsApp: string= "+584121527049";
+  tasaCambioMensaje: string = "Me indica la tasa de cambio, por favor";
+  numeroWhatsApp: string = "+584121527049";
   whatsappUrl: string = "";
 
 
@@ -102,11 +102,11 @@ export class HomeComponent implements OnInit {
     try {
       const data = await firstValueFrom(this.scrapingServices.getDollarData());
 
-          console.log('Respuesta API:', data);
-      this.dollarData = data[0].promedio;
+      console.log('Respuesta API:', data);
+      this.dollarData = data.promedio;
 
     } catch (err) {
-      console.log('data:',this.dollarData);
+      console.log('data:', this.dollarData);
       console.error('Error al obtener datos del dólar BCV:', err);
     }
   }
@@ -122,12 +122,11 @@ export class HomeComponent implements OnInit {
   }
   async fetchEuro(): Promise<void> {
     try {
-      const data = await firstValueFrom(this.scrapingServices.getDollarData());
+      const data = await firstValueFrom(this.scrapingServices.getEuro());
       this.euro = data[1].promedio;
     } catch (err) {
       console.error('Error al obtener datos del dólar paralelo:', err);
     }
-
 
   }
 
@@ -141,42 +140,10 @@ export class HomeComponent implements OnInit {
 
   tasa() {
     if (this.dollarParalelo !== null) {
-      this.tasaZ = this.dollarParalelo *0.88;
-      //this.selectedTasa = this.tasaZ; // Actualizar el valor predeterminado
+      this.tasaZ = this.dollarParalelo * 0.88;
     }
   }
-  /*updateTotal() {
-    this.totaltasa = this.selectedTasa;
-  }*/
-  /*
-  checkAuthentication() {
-    const token = localStorage.getItem('token');
-    this.isAuthenticated = !!token;
-  }
-
-  logout() {
-    this.authService.logout();
-    this.isAuthenticated = false;
-    this.router.navigate(['/login']);
-  }*/
-  /*
-    llenarData() {
   
-      this.apiService.getProducts().subscribe({
-        next: (data) => {
-          this.lista = data;
-          this.calculoTasa();
-  
-        },
-        error: (err: any) => {
-          console.log(err);
-        },
-  
-      })
-      this.calculoTasa();
-  
-    }*/
-
   insertarProducto() {
     const data: Partial<productoInterface> = {
       nombre: this.nuevoProducto.nombre,
@@ -213,17 +180,7 @@ export class HomeComponent implements OnInit {
       tasa: 0
     };
   }
-  /*  confirmarEliminar(id: string): void {
-      this.apiService.delete(id).subscribe(
-        () => {
-          console.log('Elemento eliminado exitosamente');
-          this.llenarData();
-        },
-        (error) => {
-          console.error('Error al eliminar el elemento:', error);
-        }
-      );
-    }*/
+
   mostrarModalEliminar(producto: productoInterface) {
     console.log("entro en el boton eliminar ")
     this.productoAEliminar = producto;
@@ -263,24 +220,7 @@ export class HomeComponent implements OnInit {
     }
 
   }
-  /*
-    updateBcv() {
-  
-      this.apiService.updateBcv().subscribe(
-      );
-  
-    }
-    updateBtc() {
-  
-      this.apiService.updateBtc().subscribe(
-  
-      );
-  
-    }
-  
-    cancelarEdicion() {
-      this.refreshPage()
-    }*/
+
   refreshPage() {
     window.location.reload();
   }
@@ -325,37 +265,6 @@ export class HomeComponent implements OnInit {
     this.index3 = this.tasaTotal / this.selectedTasa;
     this.index3 = parseFloat(this.index3.toFixed(2));
   }
-  /*
-    sendEmail() {
-      const to = "gonzalezjar231@gmail.com";
-      const subject = 'Datos Calculados';
-      if (this.email !== null) {
-        const text = `Tasa: ${this.total}\nCantidad a Cambiar: ${this.index3}\nTotal en Bs: ${this.tasaTotal}\nEmail: ${this.email}`;
-  
-        this.emailService.sendEmail(to, subject, text).subscribe(response => {
-          console.log('Email sent successfully', response);
-  
-        }
-          , error => {
-            console.log('Error sending email', error);
-          });
-        Swal.fire({
-          title: '¡Su orden fue creado con oc con éxito!',
-          text: 'Serás redirigido en breve...',
-          icon: 'success',
-          timer: 3000,
-          timerProgressBar: true,
-          willClose: () => {
-            this.refreshPage();
-          }
-        });
-  
-      } else
-  
-        window.alert('!Tiene que agregar un correo electronico');
-  
-    }*/
-
   sendMessage() {
     if (this.message.trim()) {
       this.messages.unshift(this.message);
@@ -417,13 +326,12 @@ export class HomeComponent implements OnInit {
     console.log("WhatsApp URL:", this.whatsappUrl); // Verifica la URL en la consola
 
   }
-get whatsappUrl1(): string {
-  const texto =
-`
-Mensaje:
+  get whatsappUrl1(): string {
+    const texto =
+      `
 ${this.message}`;
 
-  return `https://wa.me/${this.numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
-}
+    return `https://wa.me/${this.numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
+  }
 
 }
