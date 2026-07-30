@@ -13,8 +13,7 @@ import { ChatService } from '../chat/ChatService';
 import { DollarService } from '../scraping/scrapingServices';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-
-
+//import { PullToRefresh } from 'pulltorefreshjs';
 
 @Component({
   selector: 'app-home',
@@ -328,8 +327,7 @@ export class HomeComponent implements OnInit {
   }
   get whatsappUrl1(): string {
     const texto =
-      `
-${this.message}`;
+      `${this.message}`;
 
     return `https://wa.me/${this.numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
   }

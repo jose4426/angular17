@@ -210,16 +210,28 @@
 }
 
 .carousel-item img {
+
+  display: block;
   margin: auto;
 
   width: 100%;
+  height: 330px;
+
+  object-fit: contain;
+  /* Muestra la imagen completa */
+  object-position: center;
+  /* La centra */
+
+  /*margin: auto;
+
+  width: 100%;
   /* Para que ocupe todo el ancho */
-  height: 400px;
+  /*height: 400px;
   /* Ajusta a una altura uniforme */
-  display: flex;
+  /*display: flex;
   margin-top: 5%;
   justify-content: center;
-  align-items: center
+  align-items: center*/
 }
 
 .carousel-item-img1 {
@@ -239,13 +251,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  /*background-color: rgba(0, 0, 0, 0.5);*/
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  /*transition: opacity 0.3s ease-in-out;*/
 }
 
 .carousel-item:hover .overlay {
@@ -382,43 +394,27 @@ select.small-text option {
   color: white;
 }
 
-.button-tasa{
-    background-color: rgb(11, 94, 215);
-
-    height:42px;
-    border-radius:8px;
-    font-size:15px;
-    font-weight:600;
-    white-space:nowrap;
-}
-
-.button {
-  background-color: rgb(11, 94, 215);
-  /* Green */
-  width: 150px;
-  height: 40px;
-  border: none;
+.button-tasa {
+  background-color: #1667D7;
+  height: 42px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
   color: white;
-  padding: 2px 2px;
+  border: none;
+
+}
+
+.input-tasa {
+  height: 42px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
-
-
-
-.input-tasa{
-    height:42px;
-    text-align:center;
-    border-radius:8px;
-}
-
-.unidad-tasa{
-    display:flex;
-    align-items:center;
-    height:42px;
-    font-weight:bold;
+.unidad-tasa {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  font-weight: bold;
 }
